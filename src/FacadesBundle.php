@@ -13,6 +13,6 @@ class FacadesBundle extends Bundle
     {
         parent::boot();
 
-        AbstractFacade::setContainer($this->container);
+        AbstractFacade::setServiceContainer($this->container);
     }
 }

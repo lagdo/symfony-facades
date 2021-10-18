@@ -2,33 +2,65 @@
 
 namespace Lagdo\Symfony\Facades;
 
-use Psr\Container\ContainerInterface as PsrContainerInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Psr\Container\ContainerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface as Container;
 
 abstract class AbstractFacade
 {
     /**
-     * @var ContainerInterface
+     * @var Container
      */
     protected static $container = null;
 
     /**
-     * @var PsrContainerInterface
+     * @var ContainerInterface
      */
     protected static $locator = null;
 
     /**
+     * @var mixed
+     */
+    protected static $service = null;
+
+    /**
+     * Get a service using the container
+     *
+     * @param string $serviceId
+     *
+     * @return mixed|null
+     */
+    private static function _getServiceWithContainer(string $serviceId)
+    {
+        return self::$container->get($serviceId, Container::NULL_ON_INVALID_REFERENCE);
+    }
+
+    /**
+     * Get a service using the locator
+     *
+     * @param string $serviceId
+     *
+     * @return mixed|null
+     */
+    private static function _getServiceWithLocator(string $serviceId)
+    {
+        if(self::$locator === null || !self::$locator->has($serviceId))
+        {
+            return null;
+        }
+        return self::$locator->get($serviceId);
+    }
+
+    /**
      * Set the container and locator
      *
-     * @param ContainerInterface $container
-     * @param PsrContainerInterface $locator
+     * @param Container $container
      *
      * @return void
      */
-    public static function setContainer(ContainerInterface $container)
+    public static function setServiceContainer(Container $container)
     {
         self::$container = $container;
-        self::$locator = $container->get('lagdo.service_locator', ContainerInterface::NULL_ON_INVALID_REFERENCE);
+        self::$locator = self::_getServiceWithContainer('lagdo.service_locator');
     }
 
     /**
@@ -36,7 +68,7 @@ abstract class AbstractFacade
      *
      * @return string
      */
-    abstract protected static function getServiceId();
+    abstract protected static function getServiceIdentifier();
 
     /**
      * Call the service.
@@ -48,12 +80,15 @@ abstract class AbstractFacade
      */
     public static function __callStatic($method, $arguments)
     {
-        $serviceId = static::getServiceId();
-        $service = self::$container->get($serviceId, ContainerInterface::NULL_ON_INVALID_REFERENCE);
-        if($service === null && self::$locator !== null && self::$locator->has($serviceId))
+        if(static::$service === null)
         {
-            $service = self::$locator->get($serviceId);
+            $serviceId = static::getServiceIdentifier();
+            static::$service = self::_getServiceWithContainer($serviceId);
+            if(static::$service === null)
+            {
+                static::$service = self::_getServiceWithLocator($serviceId);
+            }
         }
-        return \call_user_func_array([$service, $method], $arguments);
+        return \call_user_func_array([static::$service, $method], $arguments);
     }
 }
