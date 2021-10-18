@@ -1,21 +1,21 @@
 Facades for Symfony services
 ============================
 
-With this package, Symfony services can be called using facades, ie with static method syntax.
+With this package, Symfony services can be called using facades, with static method syntax.
 
-It is a simpler alternative to passing services as parameters in the constructors of other services.
+It is a simpler alternative to passing services as parameters in the constructors of other classes.
 It will be especially interesting in the case when a class depends on many services, but calls each of them only occasionally.
 
-Installation
-------------
+## Installation
 
 Install the package with  `composer`.
 ```bash
 composer require lagdo/symfony-facades
 ```
 
-Usage
------
+If the project is not using Symfony Flex, then add the `Lagdo\Symfony\Facades\FacadesBundle` in the `src/Kernel.php` file.
+
+## Usage
 
 A facade inherits from the `Lagdo\Symfony\Facades\AbstractFacade` abstract class, and implements the `getServiceId()` method, which returns the id of the corresponding service.
 
@@ -47,8 +47,9 @@ MyFacade::myMethod();
 
 ## Using a service locator
 
-The above code will work only for services that are declared as public.
-A service locator must be defined in the `config/services.yaml` file, in order to provide access to private services.
+The above facade will work only for services that are declared as public.
+
+A service locator must be defined in the `config/services.yaml` file, in order to define facades for private services.
 See the [Symfony service locators documentation](https://symfony.com/doc/4.4/service_container/service_subscribers_locators.html).
 
 The following example defines a facade for the `Twig` service.
@@ -63,7 +64,7 @@ The following example defines a facade for the `Twig` service.
                 Twig\Environment: '@twig'
 ```
 
-With this definition, a facade can now be defined for the service.
+With this definition, a facade can be defined for the service.
 
 ```php
 namespace App\Facades;
@@ -83,7 +84,7 @@ class Twig extends AbstractFacade
 }
 ```
 
-The methods of the service can now be called using the facade.
+The methods of the service can be called using the facade.
 
 ```php
 use App\Facades\Twig;
