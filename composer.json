@@ -1,0 +1,24 @@
+{
+    "name": "lagdo/symfony-facades",
+    "type": "library",
+    "description": "Call Symfony services using facades.",
+    "authors": [
+        {"name": "Thierry Feuzeu"}
+    ],
+    "homepage": "https://github.com/lagdo/symfony-facades",
+    "license": "BSD-3-Clause",
+    "keywords": ["PHP", "Framework", "Symfony", "Services", "Facades"],
+    "support": {
+        "issues": "https://github.com/lagdo/symfony-facades/issues",
+        "source": "https://github.com/lagdo/symfony-facades"
+    },
+    "require": {
+        "psr/container": ">=1.0.0",
+        "symfony/framework-bundle": "4.*|5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lagdo\\Symfony\\Facades\\": "src/"
+        }
+    }
+}
