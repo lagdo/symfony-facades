@@ -49,13 +49,13 @@ MyFacade::myMethod();
 
 The above facade will work only for services that are declared as public.
 
-A service locator must be defined in the `config/services.yaml` file, in order to define facades for private services.
+A service locator must be declared in the `config/services.yaml` file, in order to create facades for private services.
 See the [Symfony service locators documentation](https://symfony.com/doc/4.4/service_container/service_subscribers_locators.html).
 
-The following example defines a facade for the `Twig` service.
+In the following example, the `Twig` service is passed to the service locator.
 
 ```yaml
-    lagdo.service_locator:
+    lagdo.facades.service_locator:
         public: true
         class: Symfony\Component\DependencyInjection\ServiceLocator
         tags: ['container.service_locator']
@@ -64,7 +64,7 @@ The following example defines a facade for the `Twig` service.
                 Twig\Environment: '@twig'
 ```
 
-With this definition, a facade can be defined for the service.
+A facade can then be defined for this service.
 
 ```php
 namespace App\Facades;
@@ -84,7 +84,7 @@ class Twig extends AbstractFacade
 }
 ```
 
-The methods of the service can be called using the facade.
+The methods of the service can now be called using the facade.
 
 ```php
 use App\Facades\Twig;
@@ -98,10 +98,10 @@ This package provides facades for some Symfony services.
 
 #### Logger
 
-The logger facade must be declared in the `config/services.yaml` file.
+The logger service must be passed to the service locator in the `config/services.yaml` file.
 
 ```yaml
-    lagdo.service_locator:
+    lagdo.facades.service_locator:
         public: true
         class: Symfony\Component\DependencyInjection\ServiceLocator
         tags: ['container.service_locator']
@@ -110,7 +110,7 @@ The logger facade must be declared in the `config/services.yaml` file.
                 Psr\Container\ContainerInterface: '@logger'
 ```
 
-Messages can be logged using the facade.
+Messages can now be logged using the facade.
 
 ```php
 use Lagdo\Symfony\Facades\Log;

@@ -60,7 +60,7 @@ abstract class AbstractFacade
     public static function setServiceContainer(Container $container)
     {
         self::$container = $container;
-        self::$locator = self::_getServiceWithContainer('lagdo.service_locator');
+        self::$locator = self::_getServiceWithContainer('lagdo.facades.service_locator');
     }
 
     /**
