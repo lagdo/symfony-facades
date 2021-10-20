@@ -64,12 +64,12 @@ In the following example, the `Twig` service is passed to the service locator.
                 Twig\Environment: '@twig'
 ```
 
-A facade can then be defined for this service.
+A facade can then be defined for the `Twig` service.
 
 ```php
 namespace App\Facades;
 
-use App\Services\MyService;
+use Twig\Environment;
 use Lagdo\Symfony\Facades\AbstractFacade;
 
 class Twig extends AbstractFacade
@@ -79,12 +79,12 @@ class Twig extends AbstractFacade
      */
     protected static function getServiceIdentifier()
     {
-        return 'Twig\Environment';
+        return Environment::class;
     }
 }
 ```
 
-The methods of the service can now be called using the facade.
+Templates can now be rendered using the facade.
 
 ```php
 use App\Facades\Twig;
@@ -107,7 +107,7 @@ The logger service must be passed to the service locator in the `config/services
         tags: ['container.service_locator']
         arguments:
             -
-                Psr\Container\ContainerInterface: '@logger'
+                Psr\Log\LoggerInterface: '@logger'
 ```
 
 Messages can now be logged using the facade.
