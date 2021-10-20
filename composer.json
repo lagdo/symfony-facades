@@ -16,9 +16,20 @@
         "psr/container": ">=1.0.0",
         "symfony/framework-bundle": "4.*|5.*"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "symfony/phpunit-bridge": "^4.4",
+        "symfony/test-pack": "^1.0",
+        "nyholm/symfony-bundle-test": "^1.8"
+    },
     "autoload": {
         "psr-4": {
             "Lagdo\\Symfony\\Facades\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Lagdo\\Symfony\\Facades\\Tests\\": "tests/"
         }
     }
 }
