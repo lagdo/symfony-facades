@@ -2,7 +2,7 @@
 
 namespace Lagdo\Symfony\Facades;
 
-use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * @method static void emergency(string|\Stringable $message, array $context = [])
@@ -22,6 +22,6 @@ class Log extends AbstractFacade
      */
     protected static function getServiceIdentifier()
     {
-        return ContainerInterface::class;
+        return LoggerInterface::class;
     }
 }
