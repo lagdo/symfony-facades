@@ -2,18 +2,18 @@
 
 namespace Lagdo\Symfony\Facades;
 
-use Psr\Container\ContainerInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface as Container;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ServiceLocator;
 
 abstract class AbstractFacade
 {
     /**
-     * @var Container
+     * @var ContainerInterface
      */
     protected static $container = null;
 
     /**
-     * @var ContainerInterface
+     * @var ServiceLocator
      */
     protected static $locator = null;
 
@@ -31,7 +31,7 @@ abstract class AbstractFacade
      */
     private static function _getServiceWithContainer(string $serviceId)
     {
-        return self::$container->get($serviceId, Container::NULL_ON_INVALID_REFERENCE);
+        return self::$container->get($serviceId, ContainerInterface::NULL_ON_INVALID_REFERENCE);
     }
 
     /**
@@ -53,11 +53,11 @@ abstract class AbstractFacade
     /**
      * Set the container and locator
      *
-     * @param Container $container
+     * @param ContainerInterface $container
      *
      * @return void
      */
-    public static function setServiceContainer(Container $container)
+    public static function setServiceContainer(ContainerInterface $container)
     {
         self::$container = $container;
         self::$locator = self::_getServiceWithContainer('lagdo.facades.service_locator');

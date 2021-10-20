@@ -37,7 +37,7 @@ class MyFacade extends AbstractFacade
 }
 ```
 
-The methods of the service can now be called using the facade.
+The methods of the `App\Services\MyService` service can now be called using the facade.
 
 ```php
 use App\Facades\MyFacade;
