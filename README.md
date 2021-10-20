@@ -1,6 +1,6 @@
-[![Build Status](https://api.travis-ci.com/lagdo/symfony-facades.svg?branch=master)](https://app.travis-ci.com/github/lagdo/symfony-facades)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/lagdo/symfony-facades/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/lagdo/symfony-facades/?branch=master)
-[![StyleCI](https://styleci.io/repos/60390067/shield?branch=master)](https://styleci.io/repos/60390067)
+[![Build Status](https://api.travis-ci.com/lagdo/symfony-facades.svg?branch=main)](https://app.travis-ci.com/github/lagdo/symfony-facades)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/lagdo/symfony-facades/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/lagdo/symfony-facades/?branch=main)
+[![StyleCI](https://styleci.io/repos/60390067/shield?branch=main)](https://styleci.io/repos/60390067)
 
 [![Latest Stable Version](https://poser.pugx.org/lagdo/symfony-facades/v/stable)](https://packagist.org/packages/lagdo/symfony-facades)
 [![Total Downloads](https://poser.pugx.org/lagdo/symfony-facades/downloads)](https://packagist.org/packages/lagdo/symfony-facades)
