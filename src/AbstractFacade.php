@@ -23,7 +23,7 @@ abstract class AbstractFacade
     protected static $service = null;
 
     /**
-     * Get a service using the container
+     * Get a service using the container.
      *
      * @param string $serviceId
      *
@@ -35,7 +35,7 @@ abstract class AbstractFacade
     }
 
     /**
-     * Get a service using the locator
+     * Get a service using the locator.
      *
      * @param string $serviceId
      *
@@ -51,7 +51,7 @@ abstract class AbstractFacade
     }
 
     /**
-     * Set the container and locator
+     * Set the container and locator.
      *
      * @param ContainerInterface $container
      *
