@@ -3,15 +3,14 @@
 namespace Lagdo\Symfony\Facades\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Nyholm\BundleTest\AppKernel;
-
 use Lagdo\Symfony\Facades\AbstractFacade;
 
 class PrivateFacadeTest extends KernelTestCase
 {
-    protected static function getKernelClass(): string
+    protected static function createKernel(array $options = [])
     {
-        return FacadesKernel::class;
+        $env = 'test';
+        return new FacadesKernel($env);
     }
 
     protected function setUp(): void
@@ -36,13 +35,7 @@ class PrivateFacadeTest extends KernelTestCase
 
     public function testFacade()
     {
-        Facades\PrivateFacade::debug("Message\n");
+        Facades\PrivateFacade::debug('Message');
         $this->assertTrue(true);
-    }
-
-    protected function tearDown(): void
-    {
-        // self::$kernel->shutdown();
-        // self::$kernel = null;
     }
 }

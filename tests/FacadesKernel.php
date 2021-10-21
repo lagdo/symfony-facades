@@ -8,13 +8,6 @@ use Lagdo\Symfony\Facades\FacadesBundle;
 
 class FacadesKernel extends AppKernel
 {
-    // public function registerBundles()
-    // {
-    //     return [
-    //         new FacadesBundle(),
-    //     ];
-    // }
-
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load(__DIR__ . '/config/services.yaml');
