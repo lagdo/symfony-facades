@@ -18,7 +18,7 @@ use Psr\Log\LoggerInterface;
 class Log extends AbstractFacade
 {
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected static function getServiceIdentifier()
     {

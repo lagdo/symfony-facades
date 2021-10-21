@@ -3,7 +3,7 @@
 namespace Lagdo\Symfony\Facades\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Lagdo\Symfony\Facades\AbstractFacade;
+use Lagdo\Symfony\Facades\Container;
 
 class PrivateFacadeTest extends KernelTestCase
 {
@@ -17,9 +17,9 @@ class PrivateFacadeTest extends KernelTestCase
     {
         self::bootKernel();
         // Get the real and unchanged service container
-        $container = self::$kernel->getContainer();
+        // $container = self::$kernel->getContainer();
 
-        AbstractFacade::setServiceContainer($container);
+        Container::init(self::$kernel->getContainer());
     }
 
     public function testService()

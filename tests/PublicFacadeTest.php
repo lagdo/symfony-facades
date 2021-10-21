@@ -4,7 +4,7 @@ namespace Lagdo\Symfony\Facades\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Nyholm\BundleTest\AppKernel;
-use Lagdo\Symfony\Facades\AbstractFacade;
+use Lagdo\Symfony\Facades\Container;
 
 class PublicFacadeTest extends KernelTestCase
 {
@@ -18,9 +18,9 @@ class PublicFacadeTest extends KernelTestCase
     {
         self::bootKernel();
         // Get the container that allows fetching private services.
-        $container = self::getContainer();
+        // $container = self::getContainer();
 
-        AbstractFacade::setServiceContainer($container);
+        Container::init(self::getContainer());
     }
 
     public function testService()
