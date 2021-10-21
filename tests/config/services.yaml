@@ -1,0 +1,8 @@
+services:
+    lagdo.facades.service_locator:
+        public: true
+        class: Symfony\Component\DependencyInjection\ServiceLocator
+        tags: ['container.service_locator']
+        arguments:
+            -
+                lagdo.facades.logger: '@logger'

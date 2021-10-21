@@ -7,31 +7,36 @@ use Nyholm\BundleTest\AppKernel;
 
 use Lagdo\Symfony\Facades\AbstractFacade;
 
-class PublicFacadeTest extends KernelTestCase
+class PrivateFacadeTest extends KernelTestCase
 {
     protected static function getKernelClass(): string
     {
-        return AppKernel::class;
+        return FacadesKernel::class;
     }
 
     protected function setUp(): void
     {
         self::bootKernel();
-        // Get the container that allows fetching private services.
-        $container = self::$container;
+        // Get the real and unchanged service container
+        $container = self::$kernel->getContainer();
 
         AbstractFacade::setServiceContainer($container);
     }
 
     public function testService()
     {
-        $this->assertTrue(self::$container->has('logger'));
+        // Get the real and unchanged service container
+        $container = self::$kernel->getContainer();
+
+        // The logger service is private
+        $this->assertFalse($container->has('logger'));
+        // The facades service locator is public
+        $this->assertTrue($container->has('lagdo.facades.service_locator'));
     }
 
     public function testFacade()
     {
-        // An exception is thrown in case of error.
-        Facades\PublicFacade::debug("Message\n");
+        Facades\PrivateFacade::debug("Message\n");
         $this->assertTrue(true);
     }
 
