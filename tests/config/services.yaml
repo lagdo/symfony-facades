@@ -5,4 +5,4 @@ services:
         tags: ['container.service_locator']
         arguments:
             -
-                lagdo.facades.logger: '@logger'
+                lagdo.facades.test_service: '@logger'

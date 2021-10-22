@@ -11,6 +11,6 @@ class PrivateFacade extends AbstractFacade
      */
     protected static function getServiceIdentifier()
     {
-        return 'lagdo.facades.logger';
+        return 'lagdo.facades.test_service';
     }
 }
