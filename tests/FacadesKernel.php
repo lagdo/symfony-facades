@@ -4,7 +4,6 @@ namespace Lagdo\Symfony\Facades\Tests;
 
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Nyholm\BundleTest\AppKernel;
-use Lagdo\Symfony\Facades\FacadesBundle;
 
 class FacadesKernel extends AppKernel
 {
