@@ -12,9 +12,6 @@ matrix:
     # only one build will send the coverage, this'll speed up other one
     # include:
 
-# faster builds on new travis setup not using sudo
-sudo: false
-
 # cache vendor dirs
 cache:
     directories:
@@ -32,7 +29,7 @@ before_script:
     - mkdir -p build/logs # Create a folder to store clover files
 
 script:
-    - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+    - XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
     - travis_retry php vendor/bin/php-coveralls -v
