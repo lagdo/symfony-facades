@@ -19,7 +19,7 @@ class ServiceLocatorTest extends KernelTestCase
     protected static function createKernel(array $options = [])
     {
         $env = 'test';
-        return new FacadesKernel($env);
+        return new Kernels\LocatorKernel($env);
     }
 
     protected function setUp(): void

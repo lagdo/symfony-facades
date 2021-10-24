@@ -59,6 +59,7 @@ final class Container
     {
         self::$services = [];
         self::$container = $container;
+        self::$locator = null;
         self::$locator = self::getService('lagdo.facades.service_locator');
     }
 }
