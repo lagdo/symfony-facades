@@ -56,25 +56,25 @@ class ServiceLocatorTest extends KernelTestCase
         catch(Exception $e){}
         $this->assertFalse($error);
 
-        // $error = true;
-        // try
-        // {
-        //     PublicFacade::debug('Locator 02');
-        //     $error = false;
-        // }
-        // catch(Error $e){}
-        // catch(Exception $e){}
-        // $this->assertTrue($error);
+        $error = true;
+        try
+        {
+            PublicFacade::debug('Locator 02');
+            $error = false;
+        }
+        catch(Error $e){}
+        catch(Exception $e){}
+        $this->assertTrue($error);
 
-        // $error = true;
-        // try
-        // {
-        //     PrivateFacade::debug('Locator 03');
-        //     $error = false;
-        // }
-        // catch(Error $e){}
-        // catch(Exception $e){}
-        // $this->assertFalse($error);
+        $error = true;
+        try
+        {
+            PrivateFacade::debug('Locator 03');
+            $error = false;
+        }
+        catch(Error $e){}
+        catch(Exception $e){}
+        $this->assertFalse($error);
     }
 
     public function testPublicFacade()
@@ -89,25 +89,25 @@ class ServiceLocatorTest extends KernelTestCase
         catch(Exception $e){}
         $this->assertTrue($error);
 
-        // $error = true;
-        // try
-        // {
-        //     PrivateFacade::debug('Locator 05');
-        //     $error = false;
-        // }
-        // catch(Error $e){}
-        // catch(Exception $e){}
-        // $this->assertFalse($error);
+        $error = true;
+        try
+        {
+            PrivateFacade::debug('Locator 05');
+            $error = false;
+        }
+        catch(Error $e){}
+        catch(Exception $e){}
+        $this->assertFalse($error);
 
-        // $error = true;
-        // try
-        // {
-        //     PublicFacade::debug('Locator 06');
-        //     $error = false;
-        // }
-        // catch(Error $e){}
-        // catch(Exception $e){}
-        // $this->assertTrue($error);
+        $error = true;
+        try
+        {
+            PublicFacade::debug('Locator 06');
+            $error = false;
+        }
+        catch(Error $e){}
+        catch(Exception $e){}
+        $this->assertTrue($error);
     }
 
     public function testPrivateFacadeAgain()
@@ -122,25 +122,25 @@ class ServiceLocatorTest extends KernelTestCase
         catch(Exception $e){}
         $this->assertFalse($error);
 
-        // $error = true;
-        // try
-        // {
-        //     PublicFacade::debug('Locator 08');
-        //     $error = false;
-        // }
-        // catch(Error $e){}
-        // catch(Exception $e){}
-        // $this->assertTrue($error);
+        $error = true;
+        try
+        {
+            PublicFacade::debug('Locator 08');
+            $error = false;
+        }
+        catch(Error $e){}
+        catch(Exception $e){}
+        $this->assertTrue($error);
 
-        // $error = true;
-        // try
-        // {
-        //     PrivateFacade::debug('Locator 09');
-        //     $error = false;
-        // }
-        // catch(Error $e){}
-        // catch(Exception $e){}
-        // $this->assertFalse($error);
+        $error = true;
+        try
+        {
+            PrivateFacade::debug('Locator 09');
+            $error = false;
+        }
+        catch(Error $e){}
+        catch(Exception $e){}
+        $this->assertFalse($error);
     }
 
     public function testPublicFacadeAgain()
@@ -155,24 +155,24 @@ class ServiceLocatorTest extends KernelTestCase
         catch(Exception $e){}
         $this->assertTrue($error);
 
-        // $error = true;
-        // try
-        // {
-        //     PrivateFacade::debug('Locator 11');
-        //     $error = false;
-        // }
-        // catch(Error $e){}
-        // catch(Exception $e){}
-        // $this->assertFalse($error);
+        $error = true;
+        try
+        {
+            PrivateFacade::debug('Locator 11');
+            $error = false;
+        }
+        catch(Error $e){}
+        catch(Exception $e){}
+        $this->assertFalse($error);
 
-        // $error = true;
-        // try
-        // {
-        //     PublicFacade::debug('Locator 12');
-        //     $error = false;
-        // }
-        // catch(Error $e){}
-        // catch(Exception $e){}
-        // $this->assertTrue($error);
+        $error = true;
+        try
+        {
+            PublicFacade::debug('Locator 12');
+            $error = false;
+        }
+        catch(Error $e){}
+        catch(Exception $e){}
+        $this->assertTrue($error);
     }
 }
