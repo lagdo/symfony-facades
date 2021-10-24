@@ -20,7 +20,9 @@
         "phpunit/phpunit": "^9.5",
         "symfony/phpunit-bridge": "^4.4",
         "symfony/test-pack": "^1.0",
-        "nyholm/symfony-bundle-test": "^1.8"
+        "nyholm/symfony-bundle-test": "^1.8",
+        "php-coveralls/php-coveralls": "^2.4",
+        "phpunit/phpcov": "^8.2"
     },
     "autoload": {
         "psr-4": {
