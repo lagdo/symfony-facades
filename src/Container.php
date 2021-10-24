@@ -8,6 +8,11 @@ use Symfony\Component\DependencyInjection\ServiceLocator;
 final class Container
 {
     /**
+     * @var array
+     */
+    private static $services = [];
+
+    /**
      * @var ContainerInterface
      */
     protected static $container = null;
@@ -26,10 +31,19 @@ final class Container
      */
     public static function getService(string $serviceId)
     {
-        $service = self::$container->get($serviceId, ContainerInterface::NULL_ON_INVALID_REFERENCE);
-        if($service === null && self::$locator !== null && self::$locator->has($serviceId))
+        $service = isset(self::$services[$serviceId]) ? self::$services[$serviceId] : null;
+        if($service === null)
         {
-            $service = self::$locator->get($serviceId);
+            $service = self::$container->get($serviceId, ContainerInterface::NULL_ON_INVALID_REFERENCE);
+            if($service === null && self::$locator !== null && self::$locator->has($serviceId))
+            {
+                $service = self::$locator->get($serviceId);
+            }
+            // If a service is found, save it locally.
+            if($service !== null)
+            {
+                self::$services[$serviceId] = $service;
+            }
         }
         return $service;
     }
@@ -43,6 +57,7 @@ final class Container
      */
     public static function init(ContainerInterface $container)
     {
+        self::$services = [];
         self::$container = $container;
         self::$locator = self::getService('lagdo.facades.service_locator');
     }
