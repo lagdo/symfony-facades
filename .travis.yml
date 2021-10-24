@@ -28,6 +28,9 @@ before_install:
 install:
     - composer install --no-interaction --prefer-dist -o
 
+before_script:
+    - mkdir -p build/logs # Create a folder to store clover files
+
 script:
     - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 
