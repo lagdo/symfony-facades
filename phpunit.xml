@@ -10,6 +10,7 @@
     </include>
     <exclude>
       <file>src/FacadesBundle.php</file>
+      <file>src/View.php</file>
     </exclude>
     <report>
       <html outputDirectory="build/coverage"/>

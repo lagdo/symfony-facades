@@ -141,7 +141,7 @@ This package provides facades for some Symfony services.
 
 #### Logger
 
-The logger service must be passed to the service locator in the `config/services.yaml` file.
+The `logger` service must be passed to the service locator in the `config/services.yaml` file.
 
 ```yaml
     lagdo.facades.service_locator:
@@ -159,6 +159,28 @@ Messages can now be logged using the facade.
 use Lagdo\Symfony\Facades\Log;
 
 Log::info($message, $vars);
+```
+
+#### View
+
+The `twig` service must be passed to the service locator in the `config/services.yaml` file.
+
+```yaml
+    lagdo.facades.service_locator:
+        public: true
+        class: Symfony\Component\DependencyInjection\ServiceLocator
+        tags: ['container.service_locator']
+        arguments:
+            -
+                Twig\Environment: '@twig'
+```
+
+Views can now be rendered using the facade.
+
+```php
+use Lagdo\Symfony\Facades\View;
+
+$html = View::render($template, $vars);
 ```
 
 Contribute
