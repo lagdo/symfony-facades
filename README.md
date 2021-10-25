@@ -107,7 +107,7 @@ namespace App\Facades;
 use Twig\Environment;
 use Lagdo\Symfony\Facades\AbstractFacade;
 
-class Twig extends AbstractFacade
+class View extends AbstractFacade
 {
     /**
      * @inheritdoc
@@ -122,9 +122,17 @@ class Twig extends AbstractFacade
 Templates can now be rendered using the facade.
 
 ```php
-use App\Facades\Twig;
+use App\Facades\View;
 
-$html = Twig::render($template, $vars);
+class TheService
+{
+    public function theMethod()
+    {
+        ...
+        $html = View::render($template, $vars);
+        ...
+    }
+}
 ```
 
 ## Provided facades
