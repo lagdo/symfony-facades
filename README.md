@@ -37,7 +37,7 @@ use Lagdo\Symfony\Facades\AbstractFacade;
 class MyFacade extends AbstractFacade
 {
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     protected static function getServiceIdentifier()
     {
@@ -46,12 +46,38 @@ class MyFacade extends AbstractFacade
 }
 ```
 
-The methods of the `App\Services\MyService` service can now be called using the facade.
+The methods of the `App\Services\MyService` service can now be called using the `App\Facades\MyFacade` facade, like this.
 
 ```php
-use App\Facades\MyFacade;
+class TheService
+{
+    public function theMethod()
+    {
+        MyFacade::myMethod();
+    }
+}
+```
 
-MyFacade::myMethod();
+Instead of this.
+
+```php
+class TheService
+{
+    /**
+     * @var MyService
+     */
+    protected $myService;
+
+    public function __construct(MyService $myService)
+    {
+        $this->myService = $myService;
+    }
+
+    public function theMethod()
+    {
+        $this->myService->myMethod();
+    }
+}
 ```
 
 ## Using a service locator
