@@ -4,6 +4,7 @@ namespace Lagdo\Symfony\Facades;
 
 use Twig\Extension\ExtensionInterface;
 use Twig\Loader\LoaderInterface;
+use Twig\NodeVisitor\NodeVisitorInterface;
 use Twig\RuntimeLoader\RuntimeLoaderInterface;
 use Twig\TokenParser\TokenParserInterface;
 use Twig\Cache\CacheInterface;
@@ -45,7 +46,6 @@ use Lagdo\Symfony\Facades\AbstractFacade;
  * @method static ExtensionInterface[] getExtensions()
  * @method static TokenParserInterface[] getTags()
  * @method static void addNodeVisitor(NodeVisitorInterface $visitor)
- * @method static NodeVisitorInterface[] getNodeVisitors()
  * @method static void addFilter(TwigFilter $filter)
  * @method static void registerUndefinedFilterCallback(callable $callable)
  * @method static void addTest(TwigTest $test)
