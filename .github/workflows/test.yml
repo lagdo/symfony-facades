@@ -6,7 +6,6 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.operating-system }}
     name: PHP ${{ matrix.php }} and Symfony ${{ matrix.symfony }}
     strategy:
       matrix:
