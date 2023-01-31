@@ -5,11 +5,21 @@ namespace Lagdo\Symfony\Facades;
 abstract class AbstractFacade
 {
     /**
-     * Get the service id.
+     * Get the service identifier.
      *
      * @return string
      */
     abstract protected static function getServiceIdentifier();
+
+    /**
+     * Get the service instance.
+     *
+     * @return mixed
+     */
+    public static function instance()
+    {
+        return FacadesBundle::getFacadeContainer()->getService(static::getServiceIdentifier());
+    }
 
     /**
      * Call the service.
@@ -21,6 +31,7 @@ abstract class AbstractFacade
      */
     public static function __callStatic(string $method, array $arguments)
     {
-        return Container::getService(static::getServiceIdentifier())->$method(...$arguments);
+        // Get the instance and call the method.
+        return self::instance()->$method(...$arguments);
     }
 }

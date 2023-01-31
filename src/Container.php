@@ -8,19 +8,39 @@ use Symfony\Component\DependencyInjection\ServiceLocator;
 final class Container
 {
     /**
-     * @var array
-     */
-    private static $services = [];
-
-    /**
      * @var ContainerInterface
      */
-    protected static $container = null;
+    protected $container;
 
     /**
-     * @var ServiceLocator
+     * @param ContainerInterface $container
      */
-    protected static $locator = null;
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
+
+    /**
+     * Get a service from the container.
+     *
+     * @param string $serviceId
+     *
+     * @return mixed|null
+     */
+    private function get(string $serviceId)
+    {
+        return $this->container->get($serviceId, ContainerInterface::NULL_ON_INVALID_REFERENCE);
+    }
+
+    /**
+     * Get the locator.
+     *
+     * @return ServiceLocator
+     */
+    public function locator()
+    {
+        return $this->get('lagdo.facades.service_locator');
+    }
 
     /**
      * Get a service using the container or the locator.
@@ -29,37 +49,16 @@ final class Container
      *
      * @return mixed|null
      */
-    public static function getService(string $serviceId)
+    public function getService(string $serviceId)
     {
-        $service = isset(self::$services[$serviceId]) ? self::$services[$serviceId] : null;
-        if($service === null)
+        if(($service = $this->get($serviceId)) !== null)
         {
-            $service = self::$container->get($serviceId, ContainerInterface::NULL_ON_INVALID_REFERENCE);
-            if($service === null && self::$locator !== null && self::$locator->has($serviceId))
-            {
-                $service = self::$locator->get($serviceId);
-            }
-            // If a service is found, save it locally.
-            if($service !== null)
-            {
-                self::$services[$serviceId] = $service;
-            }
+            return $service;
         }
-        return $service;
-    }
-
-    /**
-     * Set the container and locator.
-     *
-     * @param ContainerInterface $container
-     *
-     * @return void
-     */
-    public static function init(ContainerInterface $container)
-    {
-        self::$services = [];
-        self::$container = $container;
-        self::$locator = null;
-        self::$locator = self::getService('lagdo.facades.service_locator');
+        if(($locator = $this->locator()) !== null && $locator->has($serviceId))
+        {
+            return $locator->get($serviceId);
+        }
+        return null;
     }
 }
