@@ -3,9 +3,14 @@
 namespace Lagdo\Symfony\Facades\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Lagdo\Symfony\Facades\Container;
-use Lagdo\Symfony\Facades\Tests\Facades\PublicFacade;
-use Lagdo\Symfony\Facades\Tests\Facades\PrivateFacade;
+use Lagdo\Symfony\Facades\FacadesBundle;
+use Lagdo\Symfony\Facades\Tests\Facades\PublicServiceFacade;
+use Lagdo\Symfony\Facades\Tests\Facades\PrivateServiceFacade;
+use Lagdo\Symfony\Facades\Tests\Service\PublicServiceInterface;
+use Lagdo\Symfony\Facades\Tests\Service\PrivateServiceInterface;
+use Nyholm\BundleTest\TestKernel;
 
 use Error;
 use Exception;
@@ -16,19 +21,28 @@ use Exception;
  */
 class ServiceLocatorTest extends KernelTestCase
 {
-    protected static function createKernel(array $options = [])
+    protected static function getKernelClass(): string
     {
-        $env = 'test';
-        return new Kernels\LocatorKernel($env);
+        return TestKernel::class;
+    }
+
+    protected static function createKernel(array $options = []): KernelInterface
+    {
+        /**
+         * @var TestKernel $kernel
+         */
+        $kernel = parent::createKernel($options);
+        $kernel->addTestBundle(FacadesBundle::class);
+        $kernel->addTestConfig(__DIR__ . '/config/services.yaml');
+        $kernel->addTestConfig(__DIR__ . '/config/locator.yaml');
+        $kernel->handleOptions($options);
+
+        return $kernel;
     }
 
     protected function setUp(): void
     {
         self::bootKernel();
-        // Get the real and unchanged service container.
-        // $container = self::$kernel->getContainer();
-
-        Container::init(self::$kernel->getContainer());
     }
 
     public function testService()
@@ -36,143 +50,143 @@ class ServiceLocatorTest extends KernelTestCase
         // Get the real and unchanged service container.
         $container = self::$kernel->getContainer();
 
-        // The logger service is private.
-        $this->assertFalse($container->has('logger'));
-        // The facades service locator is public.
+        // The facades service locator present in the container.
         $this->assertTrue($container->has('lagdo.facades.service_locator'));
-        // The custom service is not defined.
-        $this->assertFalse($container->has('lagdo.facades.test_service'));
+        // The public service can be read from the container.
+        $this->assertTrue($container->has(PublicServiceInterface::class));
+        // The private service cannot be read from the container.
+        $this->assertFalse($container->has(PrivateServiceInterface::class));
     }
 
-    public function testPrivateFacade()
+    public function testPrivateServiceFacade()
     {
-        $error = true;
+        $serviceFound = false;
         try
         {
-            PrivateFacade::debug('Locator 01');
-            $error = false;
+            PrivateServiceFacade::log('Locator 01');
+            $serviceFound = true;
         }
         catch(Error $e){}
         catch(Exception $e){}
-        $this->assertFalse($error);
+        $this->assertTrue($serviceFound);
 
-        $error = true;
+        $serviceFound = false;
         try
         {
-            PublicFacade::debug('Locator 02');
-            $error = false;
+            PublicServiceFacade::log('Locator 02');
+            $serviceFound = true;
         }
         catch(Error $e){}
         catch(Exception $e){}
-        $this->assertTrue($error);
+        $this->assertTrue($serviceFound);
 
-        $error = true;
+        $serviceFound = false;
         try
         {
-            PrivateFacade::debug('Locator 03');
-            $error = false;
+            PrivateServiceFacade::log('Locator 03');
+            $serviceFound = true;
         }
         catch(Error $e){}
         catch(Exception $e){}
-        $this->assertFalse($error);
+        $this->assertTrue($serviceFound);
     }
 
-    public function testPublicFacade()
+    public function testPublicServiceFacade()
     {
-        $error = true;
+        $serviceFound = false;
         try
         {
-            PublicFacade::debug('Locator 04');
-            $error = false;
+            PublicServiceFacade::log('Locator 04');
+            $serviceFound = true;
         }
         catch(Error $e){}
         catch(Exception $e){}
-        $this->assertTrue($error);
+        $this->assertTrue($serviceFound);
 
-        $error = true;
+        $serviceFound = false;
         try
         {
-            PrivateFacade::debug('Locator 05');
-            $error = false;
+            PrivateServiceFacade::log('Locator 05');
+            $serviceFound = true;
         }
         catch(Error $e){}
         catch(Exception $e){}
-        $this->assertFalse($error);
+        $this->assertTrue($serviceFound);
 
-        $error = true;
+        $serviceFound = false;
         try
         {
-            PublicFacade::debug('Locator 06');
-            $error = false;
+            PublicServiceFacade::log('Locator 06');
+            $serviceFound = true;
         }
         catch(Error $e){}
         catch(Exception $e){}
-        $this->assertTrue($error);
+        $this->assertTrue($serviceFound);
     }
 
-    public function testPrivateFacadeAgain()
+    public function testPrivateServiceFacadeAgain()
     {
-        $error = true;
+        $serviceFound = false;
         try
         {
-            PrivateFacade::debug('Locator 07');
-            $error = false;
+            PrivateServiceFacade::log('Locator 07');
+            $serviceFound = true;
         }
         catch(Error $e){}
         catch(Exception $e){}
-        $this->assertFalse($error);
+        $this->assertTrue($serviceFound);
 
-        $error = true;
+        $serviceFound = false;
         try
         {
-            PublicFacade::debug('Locator 08');
-            $error = false;
+            PublicServiceFacade::log('Locator 08');
+            $serviceFound = true;
         }
         catch(Error $e){}
         catch(Exception $e){}
-        $this->assertTrue($error);
+        $this->assertTrue($serviceFound);
 
-        $error = true;
+        $serviceFound = false;
         try
         {
-            PrivateFacade::debug('Locator 09');
-            $error = false;
+            PrivateServiceFacade::log('Locator 09');
+            $serviceFound = true;
         }
         catch(Error $e){}
         catch(Exception $e){}
-        $this->assertFalse($error);
+        $this->assertTrue($serviceFound);
     }
 
-    public function testPublicFacadeAgain()
+    public function testPublicServiceFacadeAgain()
     {
-        $error = true;
+        $serviceFound = false;
         try
         {
-            PublicFacade::debug('Locator 10');
-            $error = false;
+            PublicServiceFacade::log('Locator 10');
+            $serviceFound = true;
         }
         catch(Error $e){}
         catch(Exception $e){}
-        $this->assertTrue($error);
+        $this->assertTrue($serviceFound);
 
-        $error = true;
+        $serviceFound = false;
         try
         {
-            PrivateFacade::debug('Locator 11');
-            $error = false;
+            PrivateServiceFacade::log('Locator 11');
+            $serviceFound = true;
         }
         catch(Error $e){}
         catch(Exception $e){}
-        $this->assertFalse($error);
+        $this->assertTrue($serviceFound);
 
-        $error = true;
+        $serviceFound = false;
         try
         {
-            PublicFacade::debug('Locator 12');
-            $error = false;
+            PublicServiceFacade::log('Locator 12');
+            $serviceFound = true;
         }
         catch(Error $e){}
         catch(Exception $e){}
-        $this->assertTrue($error);
+        $this->assertTrue($serviceFound);
     }
 }

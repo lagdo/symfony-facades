@@ -3,14 +3,15 @@
 namespace Lagdo\Symfony\Facades\Tests\Facades;
 
 use Lagdo\Symfony\Facades\AbstractFacade;
+use Lagdo\Symfony\Facades\Tests\Service\PrivateServiceInterface;
 
-class PrivateFacade extends AbstractFacade
+class PrivateServiceFacade extends AbstractFacade
 {
     /**
      * @inheritdoc
      */
     protected static function getServiceIdentifier()
     {
-        return 'lagdo.facades.test_service';
+        return PrivateServiceInterface::class;
     }
 }

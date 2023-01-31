@@ -3,8 +3,11 @@
 namespace Lagdo\Symfony\Facades\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Lagdo\Symfony\Facades\Container;
+use Lagdo\Symfony\Facades\FacadesBundle;
 use Lagdo\Symfony\Facades\Log;
+use Nyholm\BundleTest\TestKernel;
 use Psr\Log\LoggerInterface;
 
 use Error;
@@ -16,19 +19,27 @@ use Exception;
  */
 class LoggerServiceTest extends KernelTestCase
 {
-    protected static function createKernel(array $options = [])
+    protected static function getKernelClass(): string
     {
-        $env = 'test';
-        return new Kernels\Kernel($env);
+        return TestKernel::class;
+    }
+
+    protected static function createKernel(array $options = []): KernelInterface
+    {
+        /**
+         * @var TestKernel $kernel
+         */
+        $kernel = parent::createKernel($options);
+        $kernel->addTestBundle(FacadesBundle::class);
+        $kernel->addTestConfig(__DIR__ . '/config/logger.yaml');
+        $kernel->handleOptions($options);
+
+        return $kernel;
     }
 
     protected function setUp(): void
     {
         self::bootKernel();
-        // Get the real and unchanged service container.
-        // $container = self::$kernel->getContainer();
-
-        Container::init(self::$kernel->getContainer());
     }
 
     public function testService()
@@ -36,24 +47,23 @@ class LoggerServiceTest extends KernelTestCase
         // Get the real and unchanged service container.
         $container = self::$kernel->getContainer();
 
-        // The logger service is private.
-        $this->assertFalse($container->has('logger'));
         // The facades service locator is public.
         $this->assertTrue($container->has('lagdo.facades.service_locator'));
-        // The logger service is not defined.
+        // The logger service is private.
+        $this->assertFalse($container->has('logger'));
         $this->assertFalse($container->has(LoggerInterface::class));
     }
 
     public function testLoggerFacade()
     {
-        $error = true;
+        $serviceFound = false;
         try
         {
-            Log::debug('Logger');
-            $error = false;
+            Log::debug('The logger facade works!');
+            $serviceFound = true;
         }
         catch(Error $e){}
         catch(Exception $e){}
-        $this->assertFalse($error);
+        $this->assertTrue($serviceFound);
     }
 }

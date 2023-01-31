@@ -5,4 +5,5 @@ services:
         tags: ['container.service_locator']
         arguments:
             -
-                lagdo.facades.test_service: '@logger'
+                Psr\Log\LoggerInterface: '@logger'
+                Lagdo\Symfony\Facades\Tests\Service\PrivateServiceInterface: '@Lagdo\Symfony\Facades\Tests\Service\PrivateServiceInterface'

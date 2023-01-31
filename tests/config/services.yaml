@@ -1,0 +1,11 @@
+services:
+    Lagdo\Symfony\Facades\Tests\Service\PrivateServiceInterface:
+        public: false
+        class: Lagdo\Symfony\Facades\Tests\Service\PrivateService
+        arguments:
+            $logger: '@logger'
+    Lagdo\Symfony\Facades\Tests\Service\PublicServiceInterface:
+        public: true
+        class: Lagdo\Symfony\Facades\Tests\Service\PublicService
+        arguments:
+            $logger: '@logger'
