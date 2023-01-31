@@ -7,8 +7,10 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Lagdo\Symfony\Facades\Container;
 use Lagdo\Symfony\Facades\FacadesBundle;
 use Lagdo\Symfony\Facades\Log;
+use Lagdo\Symfony\Facades\View;
 use Nyholm\BundleTest\TestKernel;
 use Psr\Log\LoggerInterface;
+use Twig\Environment as TemplateEngine;
 
 use Error;
 use Exception;
@@ -17,7 +19,7 @@ use Exception;
  * Test the case where the service is private.
  * A service locator needs to be defined to give access to the service.
  */
-class LoggerServiceTest extends KernelTestCase
+class IncludedServiceTest extends KernelTestCase
 {
     protected static function getKernelClass(): string
     {
@@ -31,7 +33,7 @@ class LoggerServiceTest extends KernelTestCase
          */
         $kernel = parent::createKernel($options);
         $kernel->addTestBundle(FacadesBundle::class);
-        $kernel->addTestConfig(__DIR__ . '/config/logger.yaml');
+        $kernel->addTestConfig(__DIR__ . '/config/included.yaml');
         $kernel->handleOptions($options);
 
         return $kernel;
@@ -52,6 +54,8 @@ class LoggerServiceTest extends KernelTestCase
         // The logger service is private.
         $this->assertFalse($container->has('logger'));
         $this->assertFalse($container->has(LoggerInterface::class));
+        // The view service is private.
+        $this->assertFalse($container->has(TemplateEngine::class));
     }
 
     public function testLoggerFacade()
@@ -65,5 +69,18 @@ class LoggerServiceTest extends KernelTestCase
         catch(Error $e){}
         catch(Exception $e){}
         $this->assertTrue($serviceFound);
+    }
+
+    public function testViewFacade()
+    {
+        $charset = false;
+        try
+        {
+            $charset = View::getCharset();
+        }
+        catch(Error $e){}
+        catch(Exception $e){}
+        $this->assertIsString($charset);
+        $this->assertEquals($charset, 'UTF-8');
     }
 }

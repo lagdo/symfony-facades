@@ -22,7 +22,8 @@
         "symfony/test-pack": "^1.0",
         "nyholm/symfony-bundle-test": "^2.0",
         "php-coveralls/php-coveralls": "^2.4",
-        "phpunit/phpcov": "^8.2"
+        "phpunit/phpcov": "^8.2",
+        "twig/twig": "^3.5"
     },
     "autoload": {
         "psr-4": {
