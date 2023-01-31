@@ -46,8 +46,8 @@ class ServiceContainerTest extends KernelTestCase
 
     public function testService()
     {
-        // Get the container that allows fetching private services.
-        $container = self::getContainer();
+        // Get the real and unchanged service container.
+        $container = self::$kernel->getContainer();
 
         // The facades service locator is not defined in the container.
         $this->assertFalse($container->has('lagdo.facades.service_locator'));

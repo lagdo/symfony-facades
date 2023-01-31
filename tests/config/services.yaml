@@ -1,3 +1,6 @@
+framework:
+    http_method_override: false
+
 services:
     Lagdo\Symfony\Facades\Tests\Service\PrivateServiceInterface:
         public: false

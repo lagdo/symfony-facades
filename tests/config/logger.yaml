@@ -1,3 +1,6 @@
+framework:
+    http_method_override: false
+
 services:
     lagdo.facades.service_locator:
         public: true
