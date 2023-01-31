@@ -1,20 +1,16 @@
 <phpunit bootstrap="vendor/autoload.php">
+  <filter>
+    <whitelist processUncoveredFilesFromWhitelist="true">
+      <directory suffix=".php">src</directory>
+    </whitelist>
+  </filter>
+  <logging>
+    <log type="coverage-html" target="build/logs/html" lowUpperBound="35" highLowerBound="70"/>
+    <log type="coverage-clover" target="build/logs/clover.xml"/>
+  </logging>
   <testsuites>
-    <testsuite name="Symfony facades">
+    <testsuite name="Facades for Symfony">
       <directory>tests</directory>
     </testsuite>
   </testsuites>
-  <coverage>
-    <include>
-      <directory suffix=".php">src/</directory>
-    </include>
-    <exclude>
-      <file>src/FacadesBundle.php</file>
-      <file>src/View.php</file>
-    </exclude>
-    <report>
-      <html outputDirectory="build/coverage"/>
-      <text outputFile="build/coverage.txt"/>
-    </report>
-  </coverage>
 </phpunit>

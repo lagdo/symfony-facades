@@ -1,0 +1,39 @@
+name: Tests
+
+on:
+  push: ~
+  pull_request: ~
+
+jobs:
+  build:
+    runs-on: ${{ matrix.operating-system }}
+    name: PHP ${{ matrix.php }} and Symfony ${{ matrix.symfony }}
+    strategy:
+      matrix:
+        operating-system: [ ubuntu-latest, windows-latest ]
+        php: [ '7.4', '8.0', '8.1' ]
+        symfony: ['4.4.*', '5.3.*', '5.4.*', '6.0.*', '6.1.*']
+
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Setup PHP ${{ matrix.php }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: flex
+
+      - name: Download dependencies
+        env:
+          SYMFONY_REQUIRE: ${{ matrix.symfony }}
+        uses: ramsey/composer-install@v1
+
+      - name: Run test suite on PHP ${{ matrix.php }} and Symfony ${{ matrix.symfony }}
+        run: composer run-script test
+
+      - name: Upload to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODE_COV_TOKEN }}
+          files: ./build/logs/clover.xml
+          verbose: true

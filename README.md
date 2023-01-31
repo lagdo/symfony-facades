@@ -1,7 +1,7 @@
-[![Build Status](https://api.travis-ci.com/lagdo/symfony-facades.svg?branch=main)](https://app.travis-ci.com/github/lagdo/symfony-facades)
+[![Build Status](https://github.com/lagdo/symfony-facades/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/lagdo/symfony-facades/actions)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/lagdo/symfony-facades/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/lagdo/symfony-facades/?branch=main)
 [![StyleCI](https://styleci.io/repos/418488513/shield?branch=main)](https://styleci.io/repos/418488513)
-[![Coverage Status](https://coveralls.io/repos/github/lagdo/symfony-facades/badge.svg?branch=main)](https://coveralls.io/github/lagdo/symfony-facades?branch=main)
+[![codecov](https://codecov.io/gh/lagdo/symfony-facades/branch/main/graph/badge.svg?token=HERKC60CC1)](https://codecov.io/gh/lagdo/symfony-facades)
 
 [![Latest Stable Version](https://poser.pugx.org/lagdo/symfony-facades/v/stable)](https://packagist.org/packages/lagdo/symfony-facades)
 [![Total Downloads](https://poser.pugx.org/lagdo/symfony-facades/downloads)](https://packagist.org/packages/lagdo/symfony-facades)
