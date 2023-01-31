@@ -22,11 +22,11 @@ Install the package with  `composer`.
 composer require lagdo/symfony-facades
 ```
 
-If the project is not using Symfony Flex, then register the `Lagdo\Symfony\Facades\FacadesBundle` bundle in the `src/Kernel.php` file.
+Register the `Lagdo\Symfony\Facades\FacadesBundle` bundle in the `src/Kernel.php` file.
 
 ## Usage
 
-A facade inherits from the `Lagdo\Symfony\Facades\AbstractFacade` abstract class, and implements the `getServiceIdentifier()` method, which returns the id of the corresponding service.
+A facade inherits from the `Lagdo\Symfony\Facades\AbstractFacade` abstract class, and implements the `getServiceIdentifier()` method, which returns the id of the corresponding service in the Symfony service container.
 
 ```php
 namespace App\Facades;
@@ -80,11 +80,27 @@ class TheService
 }
 ```
 
+Starting from version 2.0.0, the `instance()` method returns the instance of the service.
+
+```php
+class TheService
+{
+    public function theMethod()
+    {
+        /**
+         * @var MyService $service
+         */
+        $service = MyFacade::instance();
+        $service->myMethod();
+    }
+}
+```
+
 ## Using a service locator
 
 The above facade will work only for services that are declared as public.
 
-A service locator must be declared in the `config/services.yaml` file, in order to create facades for private services.
+In order to call private services with facades, a service locator must be declared in the `config/services.yaml` file.
 See the [Symfony service locators documentation](https://symfony.com/doc/4.4/service_container/service_subscribers_locators.html).
 
 In the following example, the `Twig` service is passed to the service locator.
@@ -137,7 +153,7 @@ class TheService
 
 ## Provided facades
 
-This package provides facades for some Symfony services.
+This package includes facades for some Symfony services.
 
 #### Logger
 
