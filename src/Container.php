@@ -37,7 +37,7 @@ final class Container
      *
      * @return ServiceLocator
      */
-    public function locator()
+    private function locator()
     {
         return $this->get('lagdo.facades.service_locator');
     }

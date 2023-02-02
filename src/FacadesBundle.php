@@ -9,14 +9,16 @@ class FacadesBundle extends Bundle
     /**
      * @var Container
      */
-    private static $facadeContainer = null;
+    private static $serviceContainer = null;
 
     /**
-     * @return Container
+     * @param string $serviceId
+     *
+     * @return mixed|null
      */
-    public static function getFacadeContainer(): Container
+    public static function getFacadeService(string $serviceId)
     {
-        return self::$facadeContainer;
+        return self::$serviceContainer->getService($serviceId);
     }
 
     /**
@@ -26,6 +28,6 @@ class FacadesBundle extends Bundle
     {
         parent::boot();
 
-        self::$facadeContainer = new Container($this->container);
+        self::$serviceContainer = new Container($this->container);
     }
 }
