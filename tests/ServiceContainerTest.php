@@ -11,9 +11,10 @@ use Lagdo\Symfony\Facades\Tests\Facades\PrivateServiceFacade;
 use Lagdo\Symfony\Facades\Tests\Service\PublicServiceInterface;
 use Lagdo\Symfony\Facades\Tests\Service\PrivateServiceInterface;
 use Nyholm\BundleTest\TestKernel;
-
 use Error;
 use Exception;
+
+use function is_a;
 
 /**
  * Test the case where the service can be fetched directly in the container.
@@ -88,6 +89,12 @@ class ServiceContainerTest extends KernelTestCase
         catch(Error $e){}
         catch(Exception $e){}
         $this->assertFalse($serviceFound);
+
+        // Test the service class
+        $this->assertTrue(is_a(PublicServiceFacade::instance(), PublicServiceInterface::class));
+
+        // Test the service class
+        $this->assertNull(PrivateServiceFacade::instance());
     }
 
     public function testPublicServiceFacade()
@@ -121,71 +128,11 @@ class ServiceContainerTest extends KernelTestCase
         catch(Error $e){}
         catch(Exception $e){}
         $this->assertTrue($serviceFound);
-    }
 
-    public function testPrivateServiceFacadeAgain()
-    {
-        $serviceFound = false;
-        try
-        {
-            PrivateServiceFacade::log('Container 07');
-            $serviceFound = true;
-        }
-        catch(Error $e){}
-        catch(Exception $e){}
-        $this->assertFalse($serviceFound);
+        // Test the service class
+        $this->assertTrue(is_a(PublicServiceFacade::instance(), PublicServiceInterface::class));
 
-        $serviceFound = false;
-        try
-        {
-            PublicServiceFacade::log('Container 08');
-            $serviceFound = true;
-        }
-        catch(Error $e){}
-        catch(Exception $e){}
-        $this->assertTrue($serviceFound);
-
-        $serviceFound = false;
-        try
-        {
-            PrivateServiceFacade::log('Container 08');
-            $serviceFound = true;
-        }
-        catch(Error $e){}
-        catch(Exception $e){}
-        $this->assertFalse($serviceFound);
-    }
-
-    public function testPublicServiceFacadeAgain()
-    {
-        $serviceFound = false;
-        try
-        {
-            PublicServiceFacade::log('Container 10');
-            $serviceFound = true;
-        }
-        catch(Error $e){}
-        catch(Exception $e){}
-        $this->assertTrue($serviceFound);
-
-        $serviceFound = false;
-        try
-        {
-            PrivateServiceFacade::log('Container 11');
-            $serviceFound = true;
-        }
-        catch(Error $e){}
-        catch(Exception $e){}
-        $this->assertFalse($serviceFound);
-
-        $serviceFound = false;
-        try
-        {
-            PublicServiceFacade::log('Container 12');
-            $serviceFound = true;
-        }
-        catch(Error $e){}
-        catch(Exception $e){}
-        $this->assertTrue($serviceFound);
+        // Test the service class
+        $this->assertNull(PrivateServiceFacade::instance());
     }
 }

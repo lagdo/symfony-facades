@@ -11,9 +11,10 @@ use Lagdo\Symfony\Facades\Tests\Facades\PrivateServiceFacade;
 use Lagdo\Symfony\Facades\Tests\Service\PublicServiceInterface;
 use Lagdo\Symfony\Facades\Tests\Service\PrivateServiceInterface;
 use Nyholm\BundleTest\TestKernel;
-
 use Error;
 use Exception;
+
+use function is_a;
 
 /**
  * Test the case where the service is private.
@@ -89,6 +90,12 @@ class ServiceLocatorTest extends KernelTestCase
         catch(Error $e){}
         catch(Exception $e){}
         $this->assertTrue($serviceFound);
+
+        // Test the service class
+        $this->assertTrue(is_a(PrivateServiceFacade::instance(), PrivateServiceInterface::class));
+
+        // Test the service class
+        $this->assertTrue(is_a(PublicServiceFacade::instance(), PublicServiceInterface::class));
     }
 
     public function testPublicServiceFacade()
@@ -122,71 +129,11 @@ class ServiceLocatorTest extends KernelTestCase
         catch(Error $e){}
         catch(Exception $e){}
         $this->assertTrue($serviceFound);
-    }
 
-    public function testPrivateServiceFacadeAgain()
-    {
-        $serviceFound = false;
-        try
-        {
-            PrivateServiceFacade::log('Locator 07');
-            $serviceFound = true;
-        }
-        catch(Error $e){}
-        catch(Exception $e){}
-        $this->assertTrue($serviceFound);
+        // Test the service class
+        $this->assertTrue(is_a(PrivateServiceFacade::instance(), PrivateServiceInterface::class));
 
-        $serviceFound = false;
-        try
-        {
-            PublicServiceFacade::log('Locator 08');
-            $serviceFound = true;
-        }
-        catch(Error $e){}
-        catch(Exception $e){}
-        $this->assertTrue($serviceFound);
-
-        $serviceFound = false;
-        try
-        {
-            PrivateServiceFacade::log('Locator 09');
-            $serviceFound = true;
-        }
-        catch(Error $e){}
-        catch(Exception $e){}
-        $this->assertTrue($serviceFound);
-    }
-
-    public function testPublicServiceFacadeAgain()
-    {
-        $serviceFound = false;
-        try
-        {
-            PublicServiceFacade::log('Locator 10');
-            $serviceFound = true;
-        }
-        catch(Error $e){}
-        catch(Exception $e){}
-        $this->assertTrue($serviceFound);
-
-        $serviceFound = false;
-        try
-        {
-            PrivateServiceFacade::log('Locator 11');
-            $serviceFound = true;
-        }
-        catch(Error $e){}
-        catch(Exception $e){}
-        $this->assertTrue($serviceFound);
-
-        $serviceFound = false;
-        try
-        {
-            PublicServiceFacade::log('Locator 12');
-            $serviceFound = true;
-        }
-        catch(Error $e){}
-        catch(Exception $e){}
-        $this->assertTrue($serviceFound);
+        // Test the service class
+        $this->assertTrue(is_a(PublicServiceFacade::instance(), PublicServiceInterface::class));
     }
 }

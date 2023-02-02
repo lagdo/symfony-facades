@@ -11,9 +11,10 @@ use Lagdo\Symfony\Facades\View;
 use Nyholm\BundleTest\TestKernel;
 use Psr\Log\LoggerInterface;
 use Twig\Environment as TemplateEngine;
-
 use Error;
 use Exception;
+
+use function is_a;
 
 /**
  * Test the case where the service is private.
@@ -69,6 +70,9 @@ class IncludedServiceTest extends KernelTestCase
         catch(Error $e){}
         catch(Exception $e){}
         $this->assertTrue($serviceFound);
+
+        // Test the service class
+        $this->assertTrue(is_a(Log::instance(), LoggerInterface::class));
     }
 
     public function testViewFacade()
@@ -82,5 +86,8 @@ class IncludedServiceTest extends KernelTestCase
         catch(Exception $e){}
         $this->assertIsString($charset);
         $this->assertEquals($charset, 'UTF-8');
+
+        // Test the service class
+        $this->assertTrue(is_a(View::instance(), TemplateEngine::class));
     }
 }
