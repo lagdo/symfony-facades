@@ -22,7 +22,7 @@ Install the package with  `composer`.
 composer require lagdo/symfony-facades
 ```
 
-Register the `Lagdo\Symfony\Facades\FacadesBundle` bundle in the `src/Kernel.php` file.
+Register the `Lagdo\Symfony\Facades\FacadesBundle` bundle in the `app/AppKernel.php` or `config/bundles.php` file.
 
 ## Usage
 
