@@ -13,7 +13,7 @@ Facades for Symfony services
 With this package, Symfony services can be called using facades, with static method syntax.
 
 It is a simpler alternative to passing services as parameters in the constructors of other classes, or using lazy services.
-It will be especially interesting in the case when a class depends on many services, but calls each of them only occasionally.
+It will be especially interesting in the case when a class depends on many services, but calls some of them only occasionally.
 
 ## Installation
 
@@ -26,7 +26,7 @@ Register the `Lagdo\Symfony\Facades\FacadesBundle` bundle in the `app/AppKernel.
 
 ## Usage
 
-A facade inherits from the `Lagdo\Symfony\Facades\AbstractFacade` abstract class, and implements the `getServiceIdentifier()` method, which returns the id of the corresponding service in the Symfony service container.
+A facade inherits from the `Lagdo\Symfony\Facades\AbstractFacade` abstract class, and implements the `getServiceIdentifier()` method, which must return the id of the corresponding service in the Symfony service container.
 
 ```php
 namespace App\Facades;
@@ -100,7 +100,7 @@ class TheService
 
 The above facade will work only for services that are declared as public.
 
-In order to call private services with facades, a service locator must be declared in the `config/services.yaml` file.
+In order to call private services with facades, a service locator with id `lagdo.facades.service_locator` must be declared in the `config/services.yaml` file.
 See the [Symfony service locators documentation](https://symfony.com/doc/4.4/service_container/service_subscribers_locators.html).
 
 In the following example, the `Twig` service is passed to the service locator.
