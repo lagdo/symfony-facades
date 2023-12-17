@@ -18,7 +18,7 @@ abstract class AbstractFacade
      */
     public static function instance()
     {
-        return FacadesBundle::getFacadeService(static::getServiceIdentifier());
+        return Container::getFacadeService(static::getServiceIdentifier());
     }
 
     /**

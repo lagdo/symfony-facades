@@ -8,38 +8,21 @@ use Symfony\Component\DependencyInjection\ServiceLocator;
 final class Container
 {
     /**
+     * @var Container
+     */
+    private static $instance = null;
+
+    /**
      * @var ContainerInterface
      */
-    protected $container;
+    protected $container = null;
 
     /**
      * @param ContainerInterface $container
      */
-    public function __construct(ContainerInterface $container)
+    private function __construct(ContainerInterface $container)
     {
         $this->container = $container;
-    }
-
-    /**
-     * Get a service from the container.
-     *
-     * @param string $serviceId
-     *
-     * @return mixed|null
-     */
-    private function get(string $serviceId)
-    {
-        return $this->container->get($serviceId, ContainerInterface::NULL_ON_INVALID_REFERENCE);
-    }
-
-    /**
-     * Get the locator.
-     *
-     * @return ServiceLocator
-     */
-    private function locator()
-    {
-        return $this->get('lagdo.facades.service_locator');
     }
 
     /**
@@ -49,16 +32,45 @@ final class Container
      *
      * @return mixed|null
      */
-    public function getService(string $serviceId)
+    private function getService(string $serviceId)
     {
-        if(($service = $this->get($serviceId)) !== null)
+        if($this->container->has($serviceId))
         {
-            return $service;
+            // A public service will be found in the container.
+            return $this->container->get($serviceId);
         }
-        if(($locator = $this->locator()) !== null && $locator->has($serviceId))
+
+        /**
+         * @var ServiceLocator
+         */
+        $locator = $this->container->get('lagdo.facades.service_locator',
+            ContainerInterface::NULL_ON_INVALID_REFERENCE);
+        // If not found in the container, then look in the service locator.
+        if($locator !== null && $locator->has($serviceId))
         {
             return $locator->get($serviceId);
         }
+
         return null;
+    }
+
+    /**
+     * @param ContainerInterface $container
+     */
+    public static function createInstance(ContainerInterface $container)
+    {
+        self::$instance = new Container($container);
+    }
+
+    /**
+     * Get a service using the container or the locator.
+     *
+     * @param string $serviceId
+     *
+     * @return mixed|null
+     */
+    public static function getFacadeService(string $serviceId)
+    {
+        return self::$instance->getService($serviceId);
     }
 }
