@@ -1,0 +1,15 @@
+framework:
+    http_method_override: false
+
+services:
+    Twig\Environment:
+        public: false
+        factory: ['Lagdo\Symfony\Facades\Tests\Service\TwigFactory', 'twig']
+    lagdo.facades.service_locator:
+        public: true
+        class: Symfony\Component\DependencyInjection\ServiceLocator
+        tags: ['container.service_locator']
+        arguments:
+            -
+                Psr\Log\LoggerInterface: '@logger'
+                Twig\Environment: '@Twig\Environment'
