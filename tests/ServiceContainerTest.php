@@ -4,7 +4,6 @@ namespace Lagdo\Symfony\Facades\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
-use Lagdo\Symfony\Facades\Container;
 use Lagdo\Symfony\Facades\FacadesBundle;
 use Lagdo\Symfony\Facades\Tests\Facades\PublicServiceFacade;
 use Lagdo\Symfony\Facades\Tests\Facades\PrivateServiceFacade;

@@ -4,7 +4,6 @@ namespace Lagdo\Symfony\Facades\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
-use Lagdo\Symfony\Facades\Container;
 use Lagdo\Symfony\Facades\FacadesBundle;
 use Lagdo\Symfony\Facades\Log;
 use Lagdo\Symfony\Facades\View;
@@ -20,7 +19,7 @@ use function is_a;
  * Test the case where the service is private.
  * A service locator needs to be defined to give access to the service.
  */
-class IncludedServiceTest extends KernelTestCase
+class ProvidedServiceTest extends KernelTestCase
 {
     protected static function getKernelClass(): string
     {
