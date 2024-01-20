@@ -80,22 +80,6 @@ class TheService
 }
 ```
 
-Starting from version 2.0.0, the `instance()` method returns the instance of the service.
-
-```php
-class TheService
-{
-    public function theMethod()
-    {
-        /**
-         * @var MyService $service
-         */
-        $service = MyFacade::instance();
-        $service->myMethod();
-    }
-}
-```
-
 ## Using a service locator
 
 The above facade will work only for services that are declared as public.
@@ -149,6 +133,58 @@ class TheService
         ...
     }
 }
+```
+
+Starting from version 2.0.0, the `instance()` method returns the instance of the service.
+
+```php
+class TheService
+{
+    public function theMethod()
+    {
+        /**
+         * @var MyService $service
+         */
+        $service = MyFacade::instance();
+        $service->myMethod();
+    }
+}
+```
+
+## The `ServiceInstance` trait
+
+By default, each call to a facade method will also call the Symfony service container.
+
+Starting from version 2.2.0, the service instance can be saved in the facade after the first call to the Symfony service container, using the `ServiceInstance` trait.
+The next calls with return the service instance without calling the service container.
+
+```php
+namespace App\Facades;
+
+use App\Services\MyService;
+use Lagdo\Symfony\Facades\AbstractFacade;
+use Lagdo\Symfony\Facades\ServiceInstance;
+
+class MyFacade extends AbstractFacade
+{
+    use ServiceInstance;
+
+    /**
+     * @inheritDoc
+     */
+    protected static function getServiceIdentifier()
+    {
+        return MyService::class;
+    }
+}
+```
+
+The Symfony service cantainer is called only once in this example code.
+
+```php
+    MyFacade::myMethod1(); // Calls the service container
+    MyFacade::myMethod2(); // Doesn't call the service container
+    MyFacade::myMethod1(); // Doesn't call the service container
 ```
 
 ## Provided facades
