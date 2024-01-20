@@ -15,7 +15,7 @@ With this package, Symfony services can be called using facades, with static met
 It is a simpler alternative to passing services as parameters in the constructors of other classes, or using lazy services.
 It will be especially interesting in the case when a class depends on many services, but calls some of them only occasionally.
 
-## Installation
+### Installation
 
 Install the package with  `composer`.
 ```bash
@@ -24,7 +24,7 @@ composer require lagdo/symfony-facades
 
 Register the `Lagdo\Symfony\Facades\FacadesBundle` bundle in the `app/AppKernel.php` or `config/bundles.php` file.
 
-## Usage
+### Usage
 
 A facade inherits from the `Lagdo\Symfony\Facades\AbstractFacade` abstract class, and implements the `getServiceIdentifier()` method, which must return the id of the corresponding service in the Symfony service container.
 
@@ -80,7 +80,7 @@ class TheService
 }
 ```
 
-## Using a service locator
+### Using a service locator
 
 The above facade will work only for services that are declared as public.
 
@@ -135,6 +135,8 @@ class TheService
 }
 ```
 
+### Getting the service instance
+
 Starting from version 2.0.0, the `instance()` method returns the instance of the service.
 
 ```php
@@ -151,7 +153,7 @@ class TheService
 }
 ```
 
-## The `ServiceInstance` trait
+### The `ServiceInstance` trait
 
 By default, each call to a facade method will also call the Symfony service container.
 
@@ -187,7 +189,7 @@ The Symfony service cantainer is called only once in this example code.
     MyFacade::myMethod1(); // Doesn't call the service container
 ```
 
-## Provided facades
+### Provided facades
 
 This package includes facades for some Symfony services.
 
