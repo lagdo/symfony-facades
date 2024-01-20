@@ -17,6 +17,8 @@ use Psr\Log\LoggerInterface;
  */
 class Log extends AbstractFacade
 {
+    use FacadeInstance;
+
     /**
      * @inheritDoc
      */
