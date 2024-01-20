@@ -2,12 +2,12 @@
 
 namespace Lagdo\Symfony\Facades\Tests\Facades\Instance;
 
-use Lagdo\Symfony\Facades\FacadeInstance;
+use Lagdo\Symfony\Facades\ServiceInstance;
 use Lagdo\Symfony\Facades\Tests\Service\PublicServiceInterface;
 
 class PublicServiceFacade extends AbstractFacade
 {
-    use FacadeInstance;
+    use ServiceInstance;
 
     /**
      * @inheritdoc

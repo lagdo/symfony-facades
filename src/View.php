@@ -56,7 +56,7 @@ use Lagdo\Symfony\Facades\AbstractFacade;
  */
 class View extends AbstractFacade
 {
-    use FacadeInstance;
+    use ServiceInstance;
 
     /**
      * @inheritdoc

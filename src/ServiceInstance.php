@@ -2,7 +2,7 @@
 
 namespace Lagdo\Symfony\Facades;
 
-trait FacadeInstance
+trait ServiceInstance
 {
     /**
      * The service instance.

@@ -14,7 +14,7 @@ use Nyholm\BundleTest\TestKernel;
 use function is_a;
 
 /**
- * Test the FacadeInstance trait.
+ * Test the ServiceInstance trait.
  * The service container must be called only once for each service.
  */
 class ServiceInstanceTest extends KernelTestCase
