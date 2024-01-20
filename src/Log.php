@@ -15,7 +15,7 @@ use Psr\Log\LoggerInterface;
  * @method static void debug(string|\Stringable $message, array $context = [])
  * @method static void log($level, string|\Stringable $message, array $context = [])
  */
-class Log extends AbstractFacade
+final class Log extends AbstractFacade
 {
     use ServiceInstance;
 

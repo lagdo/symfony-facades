@@ -13,6 +13,6 @@ class FacadesBundle extends Bundle
     {
         parent::boot();
 
-        Container::createInstance($this->container);
+        Container::setContainer($this->container);
     }
 }

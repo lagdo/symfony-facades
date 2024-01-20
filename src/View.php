@@ -54,7 +54,7 @@ use Lagdo\Symfony\Facades\AbstractFacade;
  * @method static void addGlobal(string $name, mixed $value)
  * @method static array mergeGlobals(array $context)
  */
-class View extends AbstractFacade
+final class View extends AbstractFacade
 {
     use ServiceInstance;
 
