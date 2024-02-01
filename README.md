@@ -87,6 +87,8 @@ The above facade will work only for services that are declared as public.
 In order to call private services with facades, a service locator with id `lagdo.facades.service_locator` must be declared in the `config/services.yaml` file.
 See the [Symfony service locators documentation](https://symfony.com/doc/4.4/service_container/service_subscribers_locators.html).
 
+The private services that need to be accessed with a facade must be passed as arguments to the service locator.
+
 In the following example, the `Twig` service is passed to the service locator.
 
 ```yaml
@@ -158,7 +160,7 @@ class TheService
 By default, each call to a facade method will also call the Symfony service container.
 
 Starting from version 2.2.0, the service instance can be saved in the facade after the first call to the Symfony service container, using the `ServiceInstance` trait.
-The next calls with return the service instance without calling the service container.
+The next calls with return the service instance without calling the Symfony service container.
 
 ```php
 namespace App\Facades;
@@ -181,12 +183,12 @@ class MyFacade extends AbstractFacade
 }
 ```
 
-The Symfony service cantainer is called only once in this example code.
+The Symfony service container is called only once in this example code.
 
 ```php
-    MyFacade::myMethod1(); // Calls the service container
-    MyFacade::myMethod2(); // Doesn't call the service container
-    MyFacade::myMethod1(); // Doesn't call the service container
+    MyFacade::myMethod1(); // Calls the Symfony service container
+    MyFacade::myMethod2(); // Doesn't call the Symfony service container
+    MyFacade::myMethod1(); // Doesn't call the Symfony service container
 ```
 
 ### Provided facades

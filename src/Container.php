@@ -35,12 +35,10 @@ final class Container
             return self::$container->get($serviceId);
         }
 
-        /**
-         * @var ServiceLocator
-         */
+        // If not found in the container, then look in the service locator.
+        /** @var ServiceLocator */
         $locator = self::$container->get('lagdo.facades.service_locator',
             ContainerInterface::NULL_ON_INVALID_REFERENCE);
-        // If not found in the container, then look in the service locator.
         return ($locator !== null && $locator->has($serviceId)) ? $locator->get($serviceId) : null;
     }
 }
