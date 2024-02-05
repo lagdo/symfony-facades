@@ -13,11 +13,20 @@ final class Container
     private static $container = null;
 
     /**
+     * @var ServiceLocator
+     */
+    private static $locator = null;
+
+    /**
      * @param ContainerInterface $container
+     *
+     * @return void
      */
     public static function setContainer(ContainerInterface $container)
     {
         self::$container = $container;
+        self::$locator = $container->get('lagdo.facades.service_locator',
+            ContainerInterface::NULL_ON_INVALID_REFERENCE);
     }
 
     /**
@@ -25,20 +34,15 @@ final class Container
      *
      * @param string $serviceId
      *
-     * @return mixed|null
+     * @return mixed
      */
     public static function getFacadeService(string $serviceId)
     {
-        if(self::$container->has($serviceId))
-        {
+        return self::$container->has($serviceId) ?
             // A public service will be found in the container.
-            return self::$container->get($serviceId);
-        }
-
-        // If not found in the container, then look in the service locator.
-        /** @var ServiceLocator */
-        $locator = self::$container->get('lagdo.facades.service_locator',
-            ContainerInterface::NULL_ON_INVALID_REFERENCE);
-        return ($locator !== null && $locator->has($serviceId)) ? $locator->get($serviceId) : null;
+            self::$container->get($serviceId) :
+            // If not found in the container, then look in the service locator.
+            (self::$locator !== null && self::$locator->has($serviceId) ?
+            self::$locator->get($serviceId) : null);
     }
 }
