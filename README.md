@@ -88,6 +88,7 @@ In order to call private services with facades, a service locator with id `lagdo
 See the [Symfony service locators documentation](https://symfony.com/doc/4.4/service_container/service_subscribers_locators.html).
 
 The private services that need to be accessed with a facade must be passed as arguments to the service locator.
+For each argument, the key is the service id in the facade, while the value is the service id in the container.
 
 In the following example, the `Twig` service is passed to the service locator.
 
@@ -106,7 +107,6 @@ A facade can then be defined for the `Twig` service.
 ```php
 namespace App\Facades;
 
-use Twig\Environment;
 use Lagdo\Symfony\Facades\AbstractFacade;
 
 class View extends AbstractFacade
@@ -116,7 +116,7 @@ class View extends AbstractFacade
      */
     protected static function getServiceIdentifier()
     {
-        return Environment::class;
+        return \Twig\Environment::class;
     }
 }
 ```
