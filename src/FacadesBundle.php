@@ -2,6 +2,7 @@
 
 namespace Lagdo\Symfony\Facades;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class FacadesBundle extends Bundle
@@ -14,5 +15,15 @@ class FacadesBundle extends Bundle
         parent::boot();
 
         Container::setContainer($this->container);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new DependencyInjection\Compiler\CompilerPass());
     }
 }

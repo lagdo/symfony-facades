@@ -22,7 +22,7 @@ Install the package with  `composer`.
 composer require lagdo/symfony-facades
 ```
 
-Register the `Lagdo\Symfony\Facades\FacadesBundle` bundle in the `app/AppKernel.php` or `config/bundles.php` file.
+Register the `Lagdo\Symfony\Facades\FacadesBundle` bundle in the `config/bundles.php` file.
 
 ### Usage
 
@@ -133,6 +133,48 @@ class TheService
         ...
         $html = View::render($template, $vars);
         ...
+    }
+}
+```
+
+### The `lagdo.facades.service` tag
+
+Starting from version 2.3.0, the private services that need to be accessed with a facade can be tagged with `lagdo.facades.service`.
+
+These services will then be automatically passed to the service locator, together with those received as arguments.
+
+In the following example, the `App\Services\TaggedService` service will be passed to the service locator.
+
+```yaml
+    lagdo.facades.service_locator:
+        public: true
+        class: Symfony\Component\DependencyInjection\ServiceLocator
+        tags: ['container.service_locator']
+        arguments:
+            -
+                Twig\Environment: '@twig'
+
+    App\Services\TaggedService:
+        tags: [lagdo.facades.service]
+        class: App\Services\TaggedService
+```
+
+A facade can then be defined for the service.
+
+```php
+namespace App\Facades;
+
+use App\Services\TaggedService;
+use Lagdo\Symfony\Facades\AbstractFacade;
+
+class TaggedServiceFacade extends AbstractFacade
+{
+    /**
+     * @inheritdoc
+     */
+    protected static function getServiceIdentifier()
+    {
+        return TaggedService::class;
     }
 }
 ```

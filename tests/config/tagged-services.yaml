@@ -1,0 +1,29 @@
+framework:
+    http_method_override: false
+    handle_all_throwables: true
+    session:
+        handler_id: null
+        cookie_secure: true
+        cookie_samesite: null
+    php_errors:
+        log: true
+
+services:
+    Twig\Environment:
+        public: false
+        factory: ['Lagdo\Symfony\Facades\Tests\Service\TwigFactory', 'twig']
+    lagdo.facades.service_locator:
+        public: true
+        class: Symfony\Component\DependencyInjection\ServiceLocator
+        tags: ['container.service_locator']
+        arguments:
+            -
+                Psr\Log\LoggerInterface: '@logger'
+                Twig\Environment: '@Twig\Environment'
+
+    Lagdo\Symfony\Facades\Tests\Service\TaggedService:
+        tags: [lagdo.facades.service]
+        class: Lagdo\Symfony\Facades\Tests\Service\TaggedService
+        arguments:
+            - '@logger'
+    Lagdo\Symfony\Facades\Tests\Service\TaggedServiceInterface: '@Lagdo\Symfony\Facades\Tests\Service\TaggedService'
