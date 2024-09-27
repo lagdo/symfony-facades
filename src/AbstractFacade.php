@@ -9,7 +9,7 @@ abstract class AbstractFacade
      *
      * @return string
      */
-    abstract protected static function getServiceIdentifier();
+    abstract protected static function getServiceIdentifier(): string;
 
     /**
      * Get the service instance.

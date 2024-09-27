@@ -22,7 +22,7 @@ final class Log extends AbstractFacade
     /**
      * @inheritDoc
      */
-    protected static function getServiceIdentifier()
+    protected static function getServiceIdentifier(): string
     {
         return LoggerInterface::class;
     }

@@ -13,11 +13,11 @@
         "source": "https://github.com/lagdo/symfony-facades"
     },
     "require": {
+        "php": ">=7.4.0",
         "psr/container": ">=1.0.0",
         "symfony/framework-bundle": "5.*|6.*|7.*"
     },
     "require-dev": {
-        "php": ">=7.0.0",
         "phpunit/phpunit": "^9.5",
         "symfony/phpunit-bridge": "^5.4",
         "symfony/test-pack": "^1.0",

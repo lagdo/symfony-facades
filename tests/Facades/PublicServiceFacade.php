@@ -10,7 +10,7 @@ class PublicServiceFacade extends AbstractFacade
     /**
      * @inheritdoc
      */
-    protected static function getServiceIdentifier()
+    protected static function getServiceIdentifier(): string
     {
         return PublicServiceInterface::class;
     }

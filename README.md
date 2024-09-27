@@ -39,7 +39,7 @@ class MyFacade extends AbstractFacade
     /**
      * @inheritDoc
      */
-    protected static function getServiceIdentifier()
+    protected static function getServiceIdentifier(): string
     {
         return MyService::class;
     }
@@ -114,7 +114,7 @@ class View extends AbstractFacade
     /**
      * @inheritdoc
      */
-    protected static function getServiceIdentifier()
+    protected static function getServiceIdentifier(): string
     {
         return \Twig\Environment::class;
     }
@@ -172,7 +172,7 @@ class TaggedServiceFacade extends AbstractFacade
     /**
      * @inheritdoc
      */
-    protected static function getServiceIdentifier()
+    protected static function getServiceIdentifier(): string
     {
         return TaggedService::class;
     }
@@ -218,7 +218,7 @@ class MyFacade extends AbstractFacade
     /**
      * @inheritDoc
      */
-    protected static function getServiceIdentifier()
+    protected static function getServiceIdentifier(): string
     {
         return MyService::class;
     }

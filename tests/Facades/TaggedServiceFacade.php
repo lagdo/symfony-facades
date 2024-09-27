@@ -10,7 +10,7 @@ class TaggedServiceFacade extends AbstractFacade
     /**
      * @inheritdoc
      */
-    protected static function getServiceIdentifier()
+    protected static function getServiceIdentifier(): string
     {
         return TaggedService::class;
     }

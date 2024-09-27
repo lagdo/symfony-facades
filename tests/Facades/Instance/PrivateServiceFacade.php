@@ -12,7 +12,7 @@ class PrivateServiceFacade extends AbstractFacade
     /**
      * @inheritdoc
      */
-    protected static function getServiceIdentifier()
+    protected static function getServiceIdentifier(): string
     {
         return PrivateServiceInterface::class;
     }
