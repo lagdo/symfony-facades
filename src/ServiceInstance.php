@@ -17,7 +17,7 @@ trait ServiceInstance
      *
      * @return mixed
      */
-    public static function instance()
+    public static function instance(): mixed
     {
         return self::$_serviceInstance ?: self::$_serviceInstance = parent::instance();
     }

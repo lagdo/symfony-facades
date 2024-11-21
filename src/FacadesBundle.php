@@ -3,14 +3,14 @@
 namespace Lagdo\Symfony\Facades;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 
-class FacadesBundle extends Bundle
+class FacadesBundle extends AbstractBundle
 {
     /**
      * @inheritdoc
      */
-    public function boot()
+    public function boot(): void
     {
         parent::boot();
 
@@ -20,7 +20,7 @@ class FacadesBundle extends Bundle
     /**
      * @inheritDoc
      */
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         parent::build($container);
 

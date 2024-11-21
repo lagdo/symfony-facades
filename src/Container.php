@@ -22,7 +22,7 @@ final class Container
      *
      * @return void
      */
-    public static function setContainer(ContainerInterface $container)
+    public static function setContainer(ContainerInterface $container): void
     {
         self::$container = $container;
         self::$locator = $container->get('lagdo.facades.service_locator',
@@ -36,7 +36,7 @@ final class Container
      *
      * @return mixed
      */
-    public static function getFacadeService(string $serviceId)
+    public static function getFacadeService(string $serviceId): mixed
     {
         return self::$container->has($serviceId) ?
             // A public service will be found in the container.

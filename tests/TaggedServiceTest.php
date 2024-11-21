@@ -36,8 +36,7 @@ class TaggedServiceTest extends KernelTestCase
          */
         $kernel = parent::createKernel($options);
         $kernel->addTestBundle(FacadesBundle::class);
-        $kernel->addTestConfig(__DIR__ . (TestKernel::VERSION_ID < 60200 ?
-            '/config/tagged-services-pre62.yaml' : '/config/tagged-services.yaml'));
+        $kernel->addTestConfig(__DIR__ . '/config/tagged-services.yaml');
         $kernel->handleOptions($options);
 
         return $kernel;

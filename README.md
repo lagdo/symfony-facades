@@ -18,6 +18,9 @@ It will be especially interesting in the case when a class depends on many servi
 ### Installation
 
 Install the package with  `composer`.
+For Symfony version 6.* or older, install the version 2.3 of the package.
+For Symfony version 7.*, install the version 3.0.
+
 ```bash
 composer require lagdo/symfony-facades
 ```

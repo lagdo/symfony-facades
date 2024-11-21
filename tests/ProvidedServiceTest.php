@@ -33,8 +33,7 @@ class ProvidedServiceTest extends KernelTestCase
          */
         $kernel = parent::createKernel($options);
         $kernel->addTestBundle(FacadesBundle::class);
-        $kernel->addTestConfig(__DIR__ . (TestKernel::VERSION_ID < 60200 ?
-            '/config/included-pre62.yaml' : '/config/included.yaml'));
+        $kernel->addTestConfig(__DIR__ . '/config/included.yaml');
         $kernel->handleOptions($options);
 
         return $kernel;

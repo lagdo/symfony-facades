@@ -16,7 +16,7 @@ abstract class AbstractFacade
      *
      * @return mixed
      */
-    public static function instance()
+    public static function instance(): mixed
     {
         return Container::getFacadeService(static::getServiceIdentifier());
     }
@@ -29,7 +29,7 @@ abstract class AbstractFacade
      *
      * @return mixed
      */
-    public static function __callStatic(string $method, array $arguments)
+    public static function __callStatic(string $method, array $arguments): mixed
     {
         // Get the instance and call the method.
         return self::instance()->$method(...$arguments);
