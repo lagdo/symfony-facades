@@ -6,8 +6,6 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-use function array_keys;
-
 class CompilerPass implements CompilerPassInterface
 {
     /**
@@ -20,16 +18,14 @@ class CompilerPass implements CompilerPassInterface
             return;
         }
 
-        $serviceLocatorDefinition = $container->getDefinition('lagdo.facades.service_locator');
-
+        $serviceLocator = $container->getDefinition('lagdo.facades.service_locator');
         // Append the tagged services to the service locator first argument.
-        $locatedServices = $serviceLocatorDefinition->getArguments()[0] ?? [];
+        $locatedServices = $serviceLocator->getArguments()[0] ?? [];
         $services = $container->findTaggedServiceIds('lagdo.facades.service');
-        foreach(array_keys($services) as $service)
+        foreach($services as $service => $_)
         {
             $locatedServices[$service] = new Reference($service);
         }
-
-        $serviceLocatorDefinition->replaceArgument(0, $locatedServices);
+        $serviceLocator->replaceArgument(0, $locatedServices);
     }
 }

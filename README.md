@@ -146,7 +146,7 @@ Starting from version 2.3.0, the private services that need to be accessed with 
 
 These services will then be automatically passed to the service locator, together with those received as arguments.
 
-In the following example, the `App\Services\TaggedService` service will be passed to the service locator.
+In the following example, the `Twig` and `App\Services\TaggedService` services will be passed to the service locator.
 
 ```yaml
     lagdo.facades.service_locator:
