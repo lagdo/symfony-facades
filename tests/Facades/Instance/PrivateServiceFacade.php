@@ -5,6 +5,9 @@ namespace Lagdo\Symfony\Facades\Tests\Facades\Instance;
 use Lagdo\Symfony\Facades\ServiceInstance;
 use Lagdo\Symfony\Facades\Tests\Service\PrivateServiceInterface;
 
+/**
+ * @extends AbstractFacade<PrivateServiceInterface>
+ */
 class PrivateServiceFacade extends AbstractFacade
 {
     use ServiceInstance;

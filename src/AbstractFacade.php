@@ -2,6 +2,10 @@
 
 namespace Lagdo\Symfony\Facades;
 
+/**
+ * @template Service of object
+ * @mixin Service
+ */
 abstract class AbstractFacade
 {
     /**
@@ -14,7 +18,7 @@ abstract class AbstractFacade
     /**
      * Get the service instance.
      *
-     * @return mixed
+     * @return Service
      */
     public static function instance(): mixed
     {

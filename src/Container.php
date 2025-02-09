@@ -43,6 +43,6 @@ final class Container
             self::$container->get($serviceId) :
             // If not found in the container, then look in the service locator.
             (self::$locator !== null && self::$locator->has($serviceId) ?
-            self::$locator->get($serviceId) : null);
+                self::$locator->get($serviceId) : null);
     }
 }

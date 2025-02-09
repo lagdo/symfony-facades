@@ -37,6 +37,9 @@ namespace App\Facades;
 use App\Services\MyService;
 use Lagdo\Symfony\Facades\AbstractFacade;
 
+/**
+ * @extends AbstractFacade<MyService>
+ */
 class MyFacade extends AbstractFacade
 {
     /**
@@ -83,6 +86,8 @@ class TheService
 }
 ```
 
+The `@extends AbstractFacade<MyService>` phpdoc will prevent errors during code analysis with [PHPStan](https://phpstan.org/), and allow code completion on calls to facades in editors.
+
 ### Using a service locator
 
 The above facade will work only for services that are declared as public.
@@ -111,7 +116,11 @@ A facade can then be defined for the `Twig` service.
 namespace App\Facades;
 
 use Lagdo\Symfony\Facades\AbstractFacade;
+use Twig\Environment;
 
+/**
+ * @extends AbstractFacade<Environment>
+ */
 class View extends AbstractFacade
 {
     /**
@@ -119,7 +128,7 @@ class View extends AbstractFacade
      */
     protected static function getServiceIdentifier(): string
     {
-        return \Twig\Environment::class;
+        return Environment::class;
     }
 }
 ```
@@ -170,6 +179,9 @@ namespace App\Facades;
 use App\Services\TaggedService;
 use Lagdo\Symfony\Facades\AbstractFacade;
 
+/**
+ * @extends AbstractFacade<TaggedService>
+ */
 class TaggedServiceFacade extends AbstractFacade
 {
     /**
@@ -214,6 +226,9 @@ use App\Services\MyService;
 use Lagdo\Symfony\Facades\AbstractFacade;
 use Lagdo\Symfony\Facades\ServiceInstance;
 
+/**
+ * @extends AbstractFacade<MyService>
+ */
 class MyFacade extends AbstractFacade
 {
     use ServiceInstance;
