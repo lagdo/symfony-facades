@@ -15,6 +15,10 @@ With this package, Symfony services can be called using facades, with static met
 It is a simpler alternative to passing services as parameters in the constructors of other classes, or using lazy services.
 It will be especially interesting in the case when a class depends on many services, but calls some of them only occasionally.
 
+I have published this two parts articles to explain why and when to use service facades in a Symfony application.
+- Part one: https://medium.com/@thierry.feuzeu/using-service-facades-in-a-symfony-application-part-1-971867d74ab5
+- Part two: https://medium.com/@thierry.feuzeu/using-service-facades-in-a-symfony-application-part-2-9a3804afdff2
+
 ### Installation
 
 Install the package with  `composer`.
