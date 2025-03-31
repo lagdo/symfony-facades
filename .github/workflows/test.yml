@@ -45,6 +45,9 @@ jobs:
           php-version: ${{ matrix.php }}
           tools: flex
 
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
       - name: Download dependencies
         env:
           SYMFONY_REQUIRE: ${{ matrix.symfony }}
