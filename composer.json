@@ -15,7 +15,7 @@
     "require": {
         "php": ">=8.2",
         "lagdo/facades": "^1.0",
-        "psr/container": ">=2.0.0",
+        "psr/container": "^2.0",
         "symfony/framework-bundle": "7.*"
     },
     "require-dev": {
