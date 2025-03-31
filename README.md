@@ -21,7 +21,7 @@ I have published this two parts articles to explain why and when to use service 
 
 ### Installation
 
-Install the package with  `composer`.
+Install the package with `composer`.
 ```bash
 composer require lagdo/symfony-facades
 ```
@@ -219,9 +219,6 @@ class TheService
 {
     public function theMethod()
     {
-        /**
-         * @var MyService $service
-         */
         $service = MyFacade::instance();
         $service->myMethod();
     }
@@ -258,6 +255,9 @@ class MyFacade extends AbstractFacade
     }
 }
 ```
+
+> [!IMPORTANT]
+> The `Lagdo\Facades\ServiceInstance` trait *must* be defined in the final service facade class, and not inherited by a service facade.
 
 The Symfony service container is called only once in this example code.
 
