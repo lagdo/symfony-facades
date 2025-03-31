@@ -2,6 +2,7 @@
 
 namespace Lagdo\Symfony\Facades;
 
+use Lagdo\Facades\ContainerWrapper;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -14,7 +15,7 @@ class FacadesBundle extends Bundle
     {
         parent::boot();
 
-        Container::setContainer($this->container);
+        ContainerWrapper::setContainer(new Container($this->container));
     }
 
     /**

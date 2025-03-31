@@ -2,7 +2,7 @@
 
 namespace Lagdo\Symfony\Facades\Tests\Facades;
 
-use Lagdo\Symfony\Facades\AbstractFacade;
+use Lagdo\Facades\AbstractFacade;
 use Lagdo\Symfony\Facades\Tests\Service\PublicServiceInterface;
 
 /**

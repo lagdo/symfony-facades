@@ -30,13 +30,28 @@ Register the `Lagdo\Symfony\Facades\FacadesBundle` bundle in the `config/bundles
 
 ### Usage
 
-A facade inherits from the `Lagdo\Symfony\Facades\AbstractFacade` abstract class, and implements the `getServiceIdentifier()` method, which must return the id of the corresponding service in the Symfony service container.
+> [!NOTE]
+> If you are migrating from an older version to 2.4.0, please keep in mind that some classes have been moved or renamed.
+
+```php
+// Before 2.4.0:
+use Lagdo\Symfony\Facades\AbstractFacade;
+use Lagdo\Symfony\Facades\ServiceInstance;
+use Lagdo\Symfony\Facades\Log;
+
+// After 2.4.0:
+use Lagdo\Facades\AbstractFacade;
+use Lagdo\Facades\ServiceInstance;
+use Lagdo\Facades\Logger; // The facade class name has changed.
+```
+
+A facade inherits from the `Lagdo\Facades\AbstractFacade` abstract class, and implements the `getServiceIdentifier()` method, which must return the id of the corresponding service in the Symfony service container.
 
 ```php
 namespace App\Facades;
 
 use App\Services\MyService;
-use Lagdo\Symfony\Facades\AbstractFacade;
+use Lagdo\Facades\AbstractFacade;
 
 /**
  * @extends AbstractFacade<MyService>
@@ -116,7 +131,7 @@ A facade can then be defined for the `Twig` service.
 ```php
 namespace App\Facades;
 
-use Lagdo\Symfony\Facades\AbstractFacade;
+use Lagdo\Facades\AbstractFacade;
 use Twig\Environment;
 
 /**
@@ -178,7 +193,7 @@ A facade can then be defined for the service.
 namespace App\Facades;
 
 use App\Services\TaggedService;
-use Lagdo\Symfony\Facades\AbstractFacade;
+use Lagdo\Facades\AbstractFacade;
 
 /**
  * @extends AbstractFacade<TaggedService>
@@ -224,8 +239,8 @@ The next calls with return the service instance without calling the Symfony serv
 namespace App\Facades;
 
 use App\Services\MyService;
-use Lagdo\Symfony\Facades\AbstractFacade;
-use Lagdo\Symfony\Facades\ServiceInstance;
+use Lagdo\Facades\AbstractFacade;
+use Lagdo\Facades\ServiceInstance;
 
 /**
  * @extends AbstractFacade<MyService>
@@ -273,9 +288,9 @@ The `logger` service must be passed to the service locator in the `config/servic
 Messages can now be logged using the facade.
 
 ```php
-use Lagdo\Symfony\Facades\Log;
+use Lagdo\Facades\Logger;
 
-Log::info($message, $vars);
+Logger::info($message, $vars);
 ```
 
 #### View

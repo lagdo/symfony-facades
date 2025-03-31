@@ -4,8 +4,8 @@ namespace Lagdo\Symfony\Facades\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Lagdo\Facades\Logger;
 use Lagdo\Symfony\Facades\FacadesBundle;
-use Lagdo\Symfony\Facades\Log;
 use Lagdo\Symfony\Facades\View;
 use Lagdo\Symfony\Facades\Tests\Facades\TaggedServiceFacade;
 use Lagdo\Symfony\Facades\Tests\Service\TaggedService;
@@ -81,7 +81,7 @@ class TaggedServiceTest extends KernelTestCase
         $serviceFound = false;
         try
         {
-            Log::debug('The logger facade works!');
+            Logger::debug('The logger facade works!');
             $serviceFound = true;
         }
         catch(Error $e){}
@@ -89,7 +89,7 @@ class TaggedServiceTest extends KernelTestCase
         $this->assertTrue($serviceFound);
 
         // Test the service class
-        $this->assertTrue(is_a(Log::instance(), LoggerInterface::class));
+        $this->assertTrue(is_a(Logger::instance(), LoggerInterface::class));
     }
 
     public function testViewFacade()
