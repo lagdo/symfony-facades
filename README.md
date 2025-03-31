@@ -21,7 +21,7 @@ I have published this two parts articles to explain why and when to use service 
 
 ### Installation
 
-Install the package with  `composer`.
+Install the package with `composer`.
 For Symfony version 6.* or older, install the version 2.3 of the package.
 For Symfony version 7.*, install the version 3.0.
 
@@ -215,27 +215,23 @@ class TaggedServiceFacade extends AbstractFacade
 
 ### Getting the service instance
 
-Starting from version 2.0.0, the `instance()` method returns the instance of the service.
+The `instance()` method of a service facade returns the instance of the linked service.
 
 ```php
 class TheService
 {
     public function theMethod()
     {
-        /**
-         * @var MyService $service
-         */
         $service = MyFacade::instance();
         $service->myMethod();
     }
 }
 ```
 
-### The `ServiceInstance` trait
+### The `Lagdo\Facades\ServiceInstance` trait
 
 By default, each call to a facade method will also call the Symfony service container.
-
-Starting from version 2.2.0, the service instance can be saved in the facade after the first call to the Symfony service container, using the `ServiceInstance` trait.
+The service instance can be saved in the facade after the first call to the Symfony service container, using the `Lagdo\Facades\ServiceInstance` trait.
 The next calls with return the service instance without calling the Symfony service container.
 
 ```php
@@ -261,6 +257,9 @@ class MyFacade extends AbstractFacade
     }
 }
 ```
+
+> [!IMPORTANT]
+> The `Lagdo\Facades\ServiceInstance` trait *must* be defined in the final service facade class, and not inherited by a service facade.
 
 The Symfony service container is called only once in this example code.
 
