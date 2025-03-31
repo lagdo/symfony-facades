@@ -2,7 +2,7 @@
 
 namespace Lagdo\Symfony\Facades\Tests\Facades\Instance;
 
-abstract class AbstractFacade extends \Lagdo\Symfony\Facades\AbstractFacade
+abstract class AbstractFacade extends \Lagdo\Facades\AbstractFacade
 {
     public static $callCount = 0;
 

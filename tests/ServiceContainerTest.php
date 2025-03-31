@@ -3,6 +3,7 @@
 namespace Lagdo\Symfony\Facades\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Lagdo\Symfony\Facades\FacadesBundle;
 use Lagdo\Symfony\Facades\Tests\Facades\PublicServiceFacade;
@@ -93,7 +94,8 @@ class ServiceContainerTest extends KernelTestCase
         $this->assertTrue(is_a(PublicServiceFacade::instance(), PublicServiceInterface::class));
 
         // Test the service class
-        $this->assertNull(PrivateServiceFacade::instance());
+        $this->expectException(ServiceNotFoundException::class);
+        PrivateServiceFacade::instance();
     }
 
     public function testPublicServiceFacade()
@@ -132,6 +134,7 @@ class ServiceContainerTest extends KernelTestCase
         $this->assertTrue(is_a(PublicServiceFacade::instance(), PublicServiceInterface::class));
 
         // Test the service class
-        $this->assertNull(PrivateServiceFacade::instance());
+        $this->expectException(ServiceNotFoundException::class);
+        PrivateServiceFacade::instance();
     }
 }

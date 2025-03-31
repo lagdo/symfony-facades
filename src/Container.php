@@ -2,47 +2,48 @@
 
 namespace Lagdo\Symfony\Facades;
 
+use Psr\Container\ContainerInterface as PsrContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 
-final class Container
+final class Container implements PsrContainerInterface
 {
     /**
      * @var ContainerInterface
      */
-    private static $container = null;
+    private ?ContainerInterface $container = null;
 
     /**
      * @var ServiceLocator
      */
-    private static $locator = null;
+    private ?ServiceLocator $locator = null;
 
     /**
      * @param ContainerInterface $container
-     *
-     * @return void
      */
-    public static function setContainer(ContainerInterface $container): void
+    public function __construct(ContainerInterface $container)
     {
-        self::$container = $container;
-        self::$locator = $container->get('lagdo.facades.service_locator',
+        $this->container = $container;
+        $this->locator = $container->get('lagdo.facades.service_locator',
             ContainerInterface::NULL_ON_INVALID_REFERENCE);
     }
 
     /**
-     * Get a service using the container or the locator.
-     *
-     * @param string $serviceId
-     *
-     * @return mixed
+     * @inheritDoc
      */
-    public static function getFacadeService(string $serviceId): mixed
+    public function get(string $serviceId)
     {
-        return self::$container->has($serviceId) ?
-            // A public service will be found in the container.
-            self::$container->get($serviceId) :
-            // If not found in the container, then look in the service locator.
-            (self::$locator !== null && self::$locator->has($serviceId) ?
-                self::$locator->get($serviceId) : null);
+        return !$this->locator ? $this->container->get($serviceId) :
+            ($this->container->has($serviceId) ? $this->container->get($serviceId) :
+                $this->locator->get($serviceId));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function has(string $serviceId): bool
+    {
+        return $this->container->has($serviceId) ||
+            ($this->locator !== null && $this->locator->has($serviceId));
     }
 }

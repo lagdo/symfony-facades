@@ -2,6 +2,7 @@
 
 namespace Lagdo\Symfony\Facades;
 
+use Lagdo\Facades\AbstractFacade;
 use Twig\Environment;
 
 /**
@@ -9,8 +10,6 @@ use Twig\Environment;
  */
 final class View extends AbstractFacade
 {
-    use ServiceInstance;
-
     /**
      * @inheritdoc
      */
