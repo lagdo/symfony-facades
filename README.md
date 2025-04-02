@@ -19,6 +19,17 @@ I have published this two parts articles to explain why and when to use service 
 - Part one: https://medium.com/@thierry.feuzeu/using-service-facades-in-a-symfony-application-part-1-971867d74ab5
 - Part two: https://medium.com/@thierry.feuzeu/using-service-facades-in-a-symfony-application-part-2-9a3804afdff2
 
+### Facades definition
+
+The base classes for service facade definitions are provided by the [lagdo/facades](https://github.com/lagdo/facades) package.
+
+A service facade based on this package can be use without any change with other frameworks, if a package for this framework is available, or a `PSR-11` container can be provided.
+
+The following packages are also available:
+- Laravel (yes): https://github.com/lagdo/laravel-facades
+- CakePHP: https://github.com/lagdo/cake-facades
+- Yii: https://github.com/lagdo/yii-facades
+
 ### Installation
 
 Install the package with `composer`.
@@ -31,15 +42,15 @@ Register the `Lagdo\Symfony\Facades\FacadesBundle` bundle in the `config/bundles
 ### Usage
 
 > [!NOTE]
-> If you are migrating from an older version to 2.4.0, please keep in mind that some classes have been moved or renamed.
+> If you are migrating from an older version to 3.1.0 or 2.4.0, please keep in mind that some classes have been moved or renamed.
 
 ```php
-// Before 2.4.0:
+// Before 3.1.0 or 2.4.0:
 use Lagdo\Symfony\Facades\AbstractFacade;
 use Lagdo\Symfony\Facades\ServiceInstance;
 use Lagdo\Symfony\Facades\Log;
 
-// After 2.4.0:
+// After 3.1.0 or 2.4.0:
 use Lagdo\Facades\AbstractFacade;
 use Lagdo\Facades\ServiceInstance;
 use Lagdo\Facades\Logger; // The facade class name has changed.
@@ -257,7 +268,7 @@ class MyFacade extends AbstractFacade
 ```
 
 > [!IMPORTANT]
-> The `Lagdo\Facades\ServiceInstance` trait *must* be defined in the final service facade class, and not inherited by a service facade.
+> The `Lagdo\Facades\ServiceInstance` trait *must* be used in each service facade class, and not in a parent class. The same instance will be shared by all the classes inheriting the same base class using the trait, and the service facades will ot work as expected.
 
 The Symfony service container is called only once in this example code.
 
