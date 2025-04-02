@@ -5,6 +5,7 @@ namespace Lagdo\Symfony\Facades\Tests;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Lagdo\Facades\Logger;
+use Lagdo\Symfony\Facades\Container;
 use Lagdo\Symfony\Facades\FacadesBundle;
 use Lagdo\Symfony\Facades\View;
 use Nyholm\BundleTest\TestKernel;
@@ -57,6 +58,15 @@ class ProvidedServiceTest extends KernelTestCase
         $this->assertFalse($container->has(LoggerInterface::class));
         // The view service is private.
         $this->assertFalse($container->has(TemplateEngine::class));
+    }
+
+    public function testPsrContainer()
+    {
+        // Create a PSR-11 container.
+        $container = new Container(self::$kernel->getContainer());
+
+        $this->assertTrue($container->has(LoggerInterface::class));
+        $this->assertTrue($container->has(TemplateEngine::class));
     }
 
     public function testLoggerFacade()
