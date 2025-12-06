@@ -34,7 +34,7 @@ The following packages are also available:
 
 Install the package with `composer`.
 For Symfony version 6.* or older, install the version 2.3 of the package.
-For Symfony version 7.*, install the version 3.0.
+For Symfony version 7.* and newer, install the version 3.*.
 
 ```bash
 composer require lagdo/symfony-facades
