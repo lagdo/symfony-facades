@@ -37,6 +37,10 @@ jobs:
             symfony: '8.0.*'
           - php: '8.4'
             symfony: '8.1.*'
+          - php: '8.5'
+            symfony: '8.0.*'
+          - php: '8.5'
+            symfony: '8.1.*'
 
     steps:
       - uses: actions/checkout@master
